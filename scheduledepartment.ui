@@ -149,7 +149,7 @@
      <attribute name="title">
       <string>Учителя</string>
      </attribute>
-     <widget class="QListWidget" name="listWidget_2">
+     <widget class="QListWidget" name="TeacherList">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -159,7 +159,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_4">
+     <widget class="QPushButton" name="AddTeacherButton">
       <property name="geometry">
        <rect>
         <x>210</x>
@@ -172,7 +172,7 @@
        <string>Добавить учителя</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_5">
+     <widget class="QPushButton" name="RemoveTeacherButton">
       <property name="geometry">
        <rect>
         <x>210</x>
@@ -185,7 +185,7 @@
        <string>Удалить учителя</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="NameTeacherLabel">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -196,19 +196,6 @@
       </property>
       <property name="text">
        <string>         ФИО</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_4">
-      <property name="geometry">
-       <rect>
-        <x>76</x>
-        <y>0</y>
-        <width>121</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>        Рабочие часы</string>
       </property>
      </widget>
     </widget>

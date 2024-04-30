@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ChangeWorkSlot</class>
+ <widget class="QDialog" name="ChangeWorkSlot">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>274</width>
+    <height>170</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QDialogButtonBox" name="DialogButtons">
+   <property name="geometry">
+    <rect>
+     <x>-120</x>
+     <y>130</y>
+     <width>341</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="DayBox">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>80</y>
+     <width>91</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Понедельник</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Вторник</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Среда</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Четверг</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Пятница</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Суббота</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="TimeBox">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>80</y>
+     <width>61</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>8:00</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>9:40</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>11:30</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>13:20</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>15:00</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>16:40</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="WeekBox">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>80</y>
+     <width>41</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>2</string>
+    </property>
+   </item>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>DialogButtons</sender>
+   <signal>accepted()</signal>
+   <receiver>ChangeWorkSlot</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>DialogButtons</sender>
+   <signal>rejected()</signal>
+   <receiver>ChangeWorkSlot</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

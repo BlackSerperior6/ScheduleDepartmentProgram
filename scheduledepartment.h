@@ -26,6 +26,14 @@ private slots:
 
     void on_StudyGroupList_itemDoubleClicked(QListWidgetItem *item);
 
+    void on_AddTeacherButton_clicked();
+
+    void on_TeacherList_currentRowChanged(int currentRow);
+
+    void on_RemoveTeacherButton_clicked();
+
+    void on_TeacherList_itemDoubleClicked(QListWidgetItem *item);
+
 private:
     Ui::ScheduleDepartment *ui;
 

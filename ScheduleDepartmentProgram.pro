@@ -10,17 +10,27 @@ CONFIG += c++11
 
 SOURCES += \
     changesgdata.cpp \
+    changeteacherfrom.cpp \
+    changeworkslot.cpp \
     main.cpp \
     scheduledepartment.cpp \
-    studygroup.cpp
+    studygroup.cpp \
+    teacher.cpp \
+    workslot.cpp
 
 HEADERS += \
     changesgdata.h \
+    changeteacherfrom.h \
+    changeworkslot.h \
     scheduledepartment.h \
-    studygroup.h
+    studygroup.h \
+    teacher.h \
+    workslot.h
 
 FORMS += \
     changesgdata.ui \
+    changeteacherfrom.ui \
+    changeworkslot.ui \
     scheduledepartment.ui
 
 # Default rules for deployment.
