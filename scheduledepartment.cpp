@@ -5,6 +5,7 @@
 #include "teacher.h"
 #include "changesgdata.h"
 #include "changeteacherfrom.h"
+#include "lessons.h"
 
 #include <QMessageBox>
 
@@ -24,10 +25,17 @@ ScheduleDepartment::~ScheduleDepartment()
 
 void ScheduleDepartment::on_AddStudyGroupButton_clicked()
 {
-    QListWidgetItem *item = new QListWidgetItem;
-    StudyGroup *group = new StudyGroup;
+    if (ui->TeacherList->count() == 0)
+    {
+        QMessageBox::information(nullptr, "Ошибка!",
+                                 "Перед добавление группы добавьте хотя бы одного учителя");
+        return;
+    }
 
-    if(group->GetName().isEmpty() || group->GetScheduel().isEmpty())
+    QListWidgetItem *item = new QListWidgetItem;
+    StudyGroup *group = new StudyGroup(nullptr, ui->TeacherList, ui->StudyGroupList);
+
+    if(group->GetName().isEmpty() || group->GetLessons()->count() == 0)
         return;
 
     ui->StudyGroupList->addItem(item);
@@ -59,7 +67,7 @@ void ScheduleDepartment::on_StudyGroupList_itemDoubleClicked(QListWidgetItem *it
 {
     StudyGroup *group =  (StudyGroup*) ui->StudyGroupList->itemWidget(item);
 
-    ChangeSgData *win = new ChangeSgData(nullptr, group);
+    ChangeSgData *win = new ChangeSgData(nullptr, group, ui->TeacherList, ui->StudyGroupList);
 
     win->setModal(true);
     win->exec();
@@ -91,6 +99,33 @@ void ScheduleDepartment::on_TeacherList_currentRowChanged(int currentRow)
 void ScheduleDepartment::on_RemoveTeacherButton_clicked()
 {
     if (TeachersGroupsRowSelected == -1)
+        return;
+
+    bool flag = false;
+
+    for (int i = 0; i < ui->StudyGroupList->count() && !flag; i++)
+    {
+        StudyGroup* group = (StudyGroup*)
+                ui->StudyGroupList->itemWidget(ui->StudyGroupList->item(i));
+
+        for (int j = 0; j < group->GetLessons()->count() && !flag; j++)
+        {
+            Lessons* current = (Lessons*) group->GetLessons()->
+                    itemWidget(group->GetLessons()->item(j));
+
+            flag = current->GetTeacher()->GetName() ==
+                    ((Teacher*)
+                     ui->TeacherList->
+                     itemWidget(ui->TeacherList->item(TeachersGroupsRowSelected)))->GetName();
+
+            if (flag)
+                QMessageBox::information(nullptr, "Ошибка",
+                                         "Данный предодователь преподает в группе "
+                                         + group->GetName() + ", невозможно удаление!");
+        }
+    }
+
+    if (flag)
         return;
 
     QListWidgetItem *it = ui->TeacherList->takeItem(TeachersGroupsRowSelected);

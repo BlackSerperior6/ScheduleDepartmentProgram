@@ -18,8 +18,6 @@ public:
 
     QString GetName();
 
-    void SetWorkSlots(QListWidget *list);
-
     void SetName(QString name);
 
 private:
@@ -27,8 +25,6 @@ private:
     QLabel *Name;
 
     QListWidget *WorkSlots;
-
-
 
 signals:
 

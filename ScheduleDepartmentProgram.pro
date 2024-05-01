@@ -9,9 +9,11 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    changelessonform.cpp \
     changesgdata.cpp \
     changeteacherfrom.cpp \
     changeworkslot.cpp \
+    lessons.cpp \
     main.cpp \
     scheduledepartment.cpp \
     studygroup.cpp \
@@ -19,15 +21,18 @@ SOURCES += \
     workslot.cpp
 
 HEADERS += \
+    changelessonform.h \
     changesgdata.h \
     changeteacherfrom.h \
     changeworkslot.h \
+    lessons.h \
     scheduledepartment.h \
     studygroup.h \
     teacher.h \
     workslot.h
 
 FORMS += \
+    changelessonform.ui \
     changesgdata.ui \
     changeteacherfrom.ui \
     changeworkslot.ui \

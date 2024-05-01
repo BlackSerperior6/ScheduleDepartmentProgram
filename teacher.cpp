@@ -24,21 +24,6 @@ QString Teacher::GetName()
     return Name->text();
 }
 
-void Teacher::SetWorkSlots(QListWidget *list)
-{
-    WorkSlots->clear();
-
-    for (int i = 0;i < list->count(); i++)
-    {
-        QListWidgetItem *item = list->item(i);
-
-        WorkSlot *slot = (WorkSlot*) list->itemWidget(item);
-
-        list->addItem(item);
-        list->setItemWidget(item, slot);
-    }
-}
-
 void Teacher::SetName(QString name)
 {
     Name->setText(name);

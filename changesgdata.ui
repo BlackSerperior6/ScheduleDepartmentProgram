@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>167</width>
-    <height>123</height>
+    <width>577</width>
+    <height>293</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QDialogButtonBox" name="Buttons">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>90</y>
+     <x>10</x>
+     <y>260</y>
      <width>161</width>
      <height>32</height>
     </rect>
@@ -32,21 +32,60 @@
   <widget class="QLineEdit" name="NameEdit">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>80</x>
      <y>20</y>
      <width>141</width>
      <height>20</height>
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="ScheduelEdit">
+  <widget class="QListWidget" name="LessonsList">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>50</y>
-     <width>141</width>
-     <height>20</height>
+     <width>361</width>
+     <height>192</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="AddButton">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>50</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Добавит</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="RemoveButton">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>80</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Удалить</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>61</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Название:</string>
    </property>
   </widget>
  </widget>

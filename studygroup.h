@@ -4,20 +4,20 @@
 #include <QWidget>
 #include <QString>
 #include <QLabel>
+#include <QListWidget>
 
 class StudyGroup : public QWidget
 {
     Q_OBJECT
 public:
-    explicit StudyGroup(QWidget *parent = nullptr);
+    explicit StudyGroup(QWidget *parent = nullptr, QListWidget *teachers = nullptr,
+                        QListWidget *parentList = nullptr);
 
     QString GetName();
 
-    QString GetScheduel();
+    QListWidget *GetLessons();
 
     void SetName(QString name);
-
-    void SetScheduel(QString scheduel);
 
 signals:
 
@@ -25,7 +25,7 @@ private:
 
     QLabel *Name;
 
-    QLabel *Scheduel;
+    QListWidget *Lessons;
 };
 
 #endif // STUDYGROUP_H
