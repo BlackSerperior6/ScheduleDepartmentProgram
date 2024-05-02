@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Редактор предметов</string>
   </property>
   <widget class="QDialogButtonBox" name="DialogButtons">
    <property name="geometry">
@@ -57,6 +57,9 @@
      <width>42</width>
      <height>22</height>
     </rect>
+   </property>
+   <property name="minimum">
+    <number>1</number>
    </property>
   </widget>
   <widget class="QLabel" name="label">

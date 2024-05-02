@@ -80,8 +80,6 @@ void ScheduleDepartment::on_AddTeacherButton_clicked()
 
     if(teach->GetName().isEmpty() || teach->GetWorkSlots()->count() == 0)
     {
-        QMessageBox::information(nullptr, "Ошибка", "Не указано ФИО или рабочее время");
-
         delete teach;
         delete item;
         return;

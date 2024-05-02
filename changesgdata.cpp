@@ -16,7 +16,8 @@ ChangeSgData::ChangeSgData(QWidget *parent, StudyGroup *group, QListWidget *teac
     Teachers = teachers;
     ParentList = parentList;
 
-    ui->NameEdit->setText(group->GetName());
+    ui->NameEdit->setText(Group->GetName());
+    ui->StudyAtSaturday->setChecked(Group->IsStudyingAtSaturdays());
     currentListIndex = -1;
 
     QListWidget *list = Group->GetLessons();
@@ -41,9 +42,15 @@ ChangeSgData::~ChangeSgData()
 
 void ChangeSgData::on_Buttons_accepted()
 {
-    if (ui->NameEdit->text().isEmpty() || ui->LessonsList->count() == 0)
+    if (ui->NameEdit->text().isEmpty())
     {
-        QMessageBox::information(this, "Ошибка!", "Одно из полей оказалось пустым");
+        QMessageBox::information(this, "Ошибка!", "У группы должно быть имя");
+        return;
+    }
+
+    if (ui->LessonsList->count() == 0)
+    {
+        QMessageBox::information(this, "Ошибка!", "У группы должна быть хотя бы одна пара");
         return;
     }
 
@@ -68,6 +75,7 @@ void ChangeSgData::on_Buttons_accepted()
     }
 
     Group->SetName(ui->NameEdit->text());
+    Group->SetStudyingAtSaturdays(ui->StudyAtSaturday->isChecked());
 
     QListWidget *list = Group->GetLessons();
 
@@ -135,3 +143,8 @@ void ChangeSgData::on_RemoveButton_clicked()
     ui->LessonsList->setCurrentRow(-1);
 }
 
+
+void ChangeSgData::on_ClearButton_clicked()
+{
+    ui->LessonsList->clear();
+}

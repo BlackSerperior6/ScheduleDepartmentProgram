@@ -38,6 +38,18 @@ ChangeTeacherFrom::~ChangeTeacherFrom()
 
 void ChangeTeacherFrom::on_DialogButtons_accepted()
 {
+    if (ui->NameEdit->text().isEmpty())
+    {
+        QMessageBox::information(nullptr, "Ошибка!", "Не указано ФИО преподователя!");
+        return;
+    }
+
+    if (ui->WorkSlotsList->count() == 0)
+    {
+        QMessageBox::information(nullptr, "Ошибка!", "У преподователя должно быть рабочие время!");
+        return;
+    }
+
     bool flag = false;
 
     for (int i = 0; i < ParentList->count() && !flag; i++)
@@ -122,3 +134,8 @@ void ChangeTeacherFrom::on_RemoveButton_clicked()
     ui->WorkSlotsList->setCurrentRow(-1);
 }
 
+
+void ChangeTeacherFrom::on_ClearButton_clicked()
+{
+    ui->WorkSlotsList->clear();
+}

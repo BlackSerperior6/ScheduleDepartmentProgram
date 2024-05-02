@@ -13,9 +13,15 @@ public:
     explicit StudyGroup(QWidget *parent = nullptr, QListWidget *teachers = nullptr,
                         QListWidget *parentList = nullptr);
 
+    ~StudyGroup();
+
     QString GetName();
 
     QListWidget *GetLessons();
+
+    bool IsStudyingAtSaturdays();
+
+    void SetStudyingAtSaturdays(bool value);
 
     void SetName(QString name);
 
@@ -26,6 +32,8 @@ private:
     QLabel *Name;
 
     QListWidget *Lessons;
+
+    bool StudyAtSaturday;
 };
 
 #endif // STUDYGROUP_H

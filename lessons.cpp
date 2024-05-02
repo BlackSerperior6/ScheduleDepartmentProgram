@@ -6,15 +6,15 @@ Lessons::Lessons(QWidget *parent, QListWidget *teachersList,
                  QListWidget *parentList, bool shouldCallInterface) : QWidget(parent)
 {
     Name = new QLabel(this);
-    Name->setGeometry(20, 0, 101, 16);
+    Name->setGeometry(0, 0, 111, 16);
 
     TeachersName = new QLabel(this);
-    TeachersName->setGeometry(130, 0, 151, 16);
+    TeachersName->setGeometry(120, 0, 151, 16);
 
     Teach = nullptr;
 
     AmountLabel = new QLabel(this);
-    AmountLabel->setGeometry(290, 0, 51, 16);
+    AmountLabel->setGeometry(280, 0, 355, 16);
 
     HowManyPerTwoWeeks = -1;
 

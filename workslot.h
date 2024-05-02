@@ -10,7 +10,8 @@ class WorkSlot : public QWidget
 {
     Q_OBJECT
 public:
-    explicit WorkSlot(QWidget *parent = nullptr, bool shouldCallDialogs = true, QListWidget *parentList = nullptr);
+    explicit WorkSlot(QWidget *parent = nullptr, bool shouldCallDialogs = true,
+                      QListWidget *parentList = nullptr);
 
     QString GetDay();
 
@@ -30,10 +31,6 @@ public:
 
     void operator=(WorkSlot &slot);
 
-    bool operator==(WorkSlot &slot);
-
-    bool operator!=(WorkSlot &slot);
-
     bool Compare(QString day, QString time, QString whatWeek);
 
 private:
@@ -42,8 +39,6 @@ private:
     QLabel *WhatWeek;
 
     bool isSet;
-
-
 
 signals:
 

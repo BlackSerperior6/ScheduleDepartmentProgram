@@ -14,6 +14,11 @@ Teacher::Teacher(QWidget *parent, QListWidget *parentList) : QWidget(parent)
     win->exec();
 }
 
+Teacher::~Teacher()
+{
+    delete WorkSlots;
+}
+
 QListWidget* Teacher::GetWorkSlots()
 {
     return WorkSlots;

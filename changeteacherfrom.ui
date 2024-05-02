@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>445</width>
     <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Редактор учителей</string>
   </property>
   <widget class="QDialogButtonBox" name="DialogButtons">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>240</y>
-     <width>341</width>
+     <y>260</y>
+     <width>181</width>
      <height>32</height>
     </rect>
    </property>
@@ -56,7 +56,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>40</y>
+     <y>70</y>
      <width>256</width>
      <height>192</height>
     </rect>
@@ -67,12 +67,12 @@
     <rect>
      <x>290</x>
      <y>50</y>
-     <width>75</width>
+     <width>151</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>Добавить</string>
+    <string>Добавить рабочие время</string>
    </property>
   </widget>
   <widget class="QPushButton" name="RemoveButton">
@@ -80,12 +80,64 @@
     <rect>
      <x>290</x>
      <y>80</y>
-     <width>75</width>
+     <width>151</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>Удалить</string>
+    <string>Удалить рабочие время</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>50</y>
+     <width>81</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>День недели:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>50</y>
+     <width>51</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Время:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>50</y>
+     <width>101</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>На какой неделе:</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ClearButton">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>110</y>
+     <width>151</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Очистить список</string>
    </property>
   </widget>
  </widget>

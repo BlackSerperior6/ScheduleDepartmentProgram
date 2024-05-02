@@ -14,6 +14,8 @@ class Teacher : public QWidget
 public:
     explicit Teacher(QWidget *parent = nullptr, QListWidget *parentList = nullptr);
 
+    ~Teacher();
+
     QListWidget* GetWorkSlots();
 
     QString GetName();

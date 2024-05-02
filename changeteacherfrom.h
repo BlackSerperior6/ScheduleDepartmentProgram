@@ -31,6 +31,8 @@ private slots:
 
     void on_RemoveButton_clicked();
 
+    void on_ClearButton_clicked();
+
 private:
     Ui::ChangeTeacherFrom *ui;
 

@@ -2,10 +2,11 @@
 
 #include "changeworkslot.h"
 
-WorkSlot::WorkSlot(QWidget *parent, bool shouldCallDialogs, QListWidget *parentList) : QWidget(parent)
+WorkSlot::WorkSlot(QWidget *parent, bool shouldCallDialogs,
+                   QListWidget *parentList) : QWidget(parent)
 {
     Day = new QLabel(this);
-    Day->setGeometry(20, 0, 71, 16);
+    Day->setGeometry(10, 0, 81, 16);
 
     Time = new QLabel(this);
     Time->setGeometry(100, 0, 31, 16);
@@ -57,20 +58,6 @@ void WorkSlot::operator=(WorkSlot &slot)
     SetDay(slot.GetDay());
     SetTime(slot.GetTime());
     SetWhatWeek(slot.GetWhatWeek());
-}
-
-bool WorkSlot::operator==(WorkSlot &slot)
-{
-    return GetDay() == slot.GetDay()
-            && GetTime() == slot.GetTime()
-            && GetWhatWeek() == slot.GetWhatWeek();
-}
-
-bool WorkSlot::operator!=(WorkSlot &slot)
-{
-    return GetDay() != slot.GetDay()
-            && GetTime() != slot.GetTime()
-            && GetWhatWeek() != slot.GetWhatWeek();
 }
 
 bool WorkSlot::Compare(QString day, QString time, QString whatWeek)
