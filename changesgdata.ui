@@ -10,6 +10,18 @@
     <height>313</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>507</width>
+    <height>313</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>507</width>
+    <height>313</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Редактор групп</string>
   </property>

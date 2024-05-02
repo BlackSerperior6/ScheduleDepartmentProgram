@@ -10,6 +10,18 @@
     <height>74</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>273</width>
+    <height>74</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>273</width>
+    <height>74</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Редактор рабочих дней</string>
   </property>
