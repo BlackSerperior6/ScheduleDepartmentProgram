@@ -3,8 +3,9 @@
 
 #include <QObject>
 #include <QLabel>
-
-#include "teacher.h"
+#include <QListWidget>
+#include <QListWidgetItem>
+#include <vector>
 
 class Lessons : public QWidget
 {
@@ -15,15 +16,19 @@ public:
 
     QString GetName();
 
-    Teacher* GetTeacher();
+    QWidget* GetTeacher();
 
     void SetName(QString name);
 
-    void SetTeacher(Teacher *teacher);
+    void SetTeacher(QWidget *teacher);
 
     int GetHowManyPerTwoWeeks();
 
     void SetHowManyPerTwoWeeks(int amount);
+
+    void ClearAttendingGroupsNames();
+
+    std::vector<QString>& GetAttendingGroupsNames();
 
     void operator=(Lessons &lessons);
 
@@ -35,9 +40,11 @@ private:
 
     QLabel *AmountLabel;
 
-    Teacher *Teach;
+    QWidget *Teach;
 
     int HowManyPerTwoWeeks;
+
+    std::vector<QString> AttendingGroupsNames;
 
 signals:
 

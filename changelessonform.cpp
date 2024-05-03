@@ -2,6 +2,7 @@
 #include "ui_changelessonform.h"
 
 #include "lessons.h"
+#include "teacher.h"
 
 #include <QMessageBox>
 

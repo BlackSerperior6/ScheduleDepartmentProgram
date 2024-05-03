@@ -1,4 +1,5 @@
 #include "lessons.h"
+#include "teacher.h"
 
 #include "changelessonform.h"
 
@@ -32,9 +33,11 @@ void Lessons::SetName(QString name)
     Name->setText(name);
 }
 
-void Lessons::SetTeacher(Teacher *teacher)
+void Lessons::SetTeacher(QWidget *teacher)
 {
-    TeachersName->setText(teacher->GetName());
+    Teacher* teach = (Teacher*) teacher;
+
+    TeachersName->setText(teach->GetName());
     Teach = teacher;
 }
 
@@ -56,7 +59,7 @@ QString Lessons::GetName()
     return Name->text();
 }
 
-Teacher *Lessons::GetTeacher()
+QWidget *Lessons::GetTeacher()
 {
     return Teach;
 }
@@ -64,4 +67,14 @@ Teacher *Lessons::GetTeacher()
 int Lessons::GetHowManyPerTwoWeeks()
 {
     return HowManyPerTwoWeeks;
+}
+
+void Lessons::ClearAttendingGroupsNames()
+{
+    AttendingGroupsNames.clear();
+}
+
+std::vector<QString>& Lessons::GetAttendingGroupsNames()
+{
+    return AttendingGroupsNames;
 }

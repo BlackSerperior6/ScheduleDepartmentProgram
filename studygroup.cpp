@@ -11,7 +11,9 @@ StudyGroup::StudyGroup(QWidget *parent, QListWidget *teachers, QListWidget *pare
 
     Name->setGeometry(10, 0, 191, 16);
 
-    Lessons = new QListWidget;
+    Les = new QListWidget;
+
+    ClearScheduel();
 
     ChangeSgData *win = new ChangeSgData(nullptr, this, teachers, parentList);
 
@@ -21,7 +23,7 @@ StudyGroup::StudyGroup(QWidget *parent, QListWidget *teachers, QListWidget *pare
 
 StudyGroup::~StudyGroup()
 {
-    delete Lessons;
+    delete Les;
 }
 
 void StudyGroup::SetName(QString name)
@@ -46,5 +48,21 @@ QString StudyGroup::GetName()
 
 QListWidget *StudyGroup::GetLessons()
 {
-    return Lessons;
+    return Les;
+
+
+}
+
+std::vector<std::vector<std::vector<Lessons*>>>& StudyGroup::GetScheduel()
+{
+    return Scheduel;
+}
+
+void StudyGroup::ClearScheduel()
+{
+    Scheduel.clear();
+
+    Scheduel = std::vector<std::vector
+            <std::vector<Lessons*>>>(6, std::vector<std::vector<Lessons*>>
+                                     (6, std::vector<Lessons*>(2, nullptr)));
 }

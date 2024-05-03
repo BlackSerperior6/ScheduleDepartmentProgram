@@ -6,6 +6,8 @@
 #include <QLabel>
 #include <QListWidget>
 
+#include "lessons.h"
+
 class StudyGroup : public QWidget
 {
     Q_OBJECT
@@ -25,13 +27,19 @@ public:
 
     void SetName(QString name);
 
+    std::vector<std::vector<std::vector<Lessons*>>>& GetScheduel();
+
+    void ClearScheduel();
+
 signals:
 
 private:
 
     QLabel *Name;
 
-    QListWidget *Lessons;
+    QListWidget *Les;
+
+    std::vector<std::vector<std::vector<Lessons*>>> Scheduel;
 
     bool StudyAtSaturday;
 };

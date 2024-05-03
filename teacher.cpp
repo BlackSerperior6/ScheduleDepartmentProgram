@@ -8,6 +8,8 @@ Teacher::Teacher(QWidget *parent, QListWidget *parentList) : QWidget(parent)
 
     WorkSlots = new QListWidget;
 
+    ClearScheduel();
+
     ChangeTeacherFrom *win = new ChangeTeacherFrom(nullptr, this, parentList);
 
     win->setModal(true);
@@ -32,4 +34,18 @@ QString Teacher::GetName()
 void Teacher::SetName(QString name)
 {
     Name->setText(name);
+}
+
+std::vector<std::vector<std::vector<Lessons*>>>& Teacher::GetScheduel()
+{
+    return Scheduel;
+}
+
+void Teacher::ClearScheduel()
+{
+    Scheduel.clear();
+
+    Scheduel = std::vector<std::vector
+            <std::vector<Lessons*>>>(6, std::vector<std::vector<Lessons*>>
+                                     (6, std::vector<Lessons*>(2, nullptr)));
 }

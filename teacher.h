@@ -6,7 +6,10 @@
 #include <QListWidgetItem>
 #include <QLabel>
 
+#include <vector>
+
 #include "workslot.h"
+#include "lessons.h"
 
 class Teacher : public QWidget
 {
@@ -20,6 +23,10 @@ public:
 
     QString GetName();
 
+    std::vector<std::vector<std::vector<Lessons*>>>& GetScheduel();
+
+    void ClearScheduel();
+
     void SetName(QString name);
 
 private:
@@ -27,6 +34,8 @@ private:
     QLabel *Name;
 
     QListWidget *WorkSlots;
+
+    std::vector<std::vector<std::vector<Lessons*>>> Scheduel;
 
 signals:
 

@@ -111,7 +111,7 @@ void ScheduleDepartment::on_RemoveTeacherButton_clicked()
             Lessons* current = (Lessons*) group->GetLessons()->
                     itemWidget(group->GetLessons()->item(j));
 
-            flag = current->GetTeacher()->GetName() ==
+            flag = ((Teacher*) current->GetTeacher())->GetName() ==
                     ((Teacher*)
                      ui->TeacherList->
                      itemWidget(ui->TeacherList->item(TeachersGroupsRowSelected)))->GetName();
