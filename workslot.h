@@ -6,6 +6,8 @@
 
 #include <QListWidget>
 
+#include "ParsedWorkSlot.h"
+
 class WorkSlot : public QWidget
 {
     Q_OBJECT
@@ -32,6 +34,8 @@ public:
     void operator=(WorkSlot &slot);
 
     bool Compare(QString day, QString time, QString whatWeek);
+
+    ParsedWorkSlot ParseToIndexes();
 
 private:
     QLabel *Day;

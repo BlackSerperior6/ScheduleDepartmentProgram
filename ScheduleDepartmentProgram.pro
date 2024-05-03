@@ -21,6 +21,7 @@ SOURCES += \
     workslot.cpp
 
 HEADERS += \
+    ParsedWorkSlot.h \
     changelessonform.h \
     changesgdata.h \
     changeteacherfrom.h \

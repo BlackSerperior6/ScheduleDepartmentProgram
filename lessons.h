@@ -30,6 +30,8 @@ public:
 
     std::vector<QString>& GetAttendingGroupsNames();
 
+    bool isAlreadyAttending(QString GroupName);
+
     void operator=(Lessons &lessons);
 
 private:

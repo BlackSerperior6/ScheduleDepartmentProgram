@@ -34,6 +34,8 @@ private slots:
 
     void on_TeacherList_itemDoubleClicked(QListWidgetItem *item);
 
+    void on_GenerateScheduelButton_clicked();
+
 private:
     Ui::ScheduleDepartment *ui;
 

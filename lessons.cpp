@@ -78,3 +78,13 @@ std::vector<QString>& Lessons::GetAttendingGroupsNames()
 {
     return AttendingGroupsNames;
 }
+
+bool Lessons::isAlreadyAttending(QString GroupName)
+{
+    bool result = false;
+
+    for (int i = 0; i < AttendingGroupsNames.size() && !result; i++)
+        result = AttendingGroupsNames[i] == GroupName;
+
+    return result;
+}

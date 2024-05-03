@@ -74,3 +74,8 @@ void WorkSlot::ChangeIsSet(bool set)
 {
     isSet = set;
 }
+
+ParsedWorkSlot WorkSlot::ParseToIndexes()
+{
+    return ParsedWorkSlot(Day->text(), Time->text(), WhatWeek->text());
+}
