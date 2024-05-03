@@ -16,7 +16,6 @@ ScheduleDepartment::ScheduleDepartment(QWidget *parent)
     , ui(new Ui::ScheduleDepartment)
 {
     ui->setupUi(this);
-    system("chcp 1251");
     StudentGroupsRowSelected = -1;
     TeachersGroupsRowSelected = -1;
 }
@@ -209,7 +208,8 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked()
 
                         else if (currentTeacher->GetScheduel()[slot.DayIndex]
                                  [slot.TimeIndex][slot.WeekIndex]->GetName()
-                                 == currentLesson->GetName())
+                                 == currentLesson->GetName() && currentTeacher->GetScheduel()[slot.DayIndex]
+                                 [slot.TimeIndex][slot.WeekIndex]->CanBeMerged())
                         {
                             currentSg->GetScheduel()[slot.DayIndex]
                                     [slot.TimeIndex][slot.WeekIndex] = currentLesson;
@@ -306,7 +306,9 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked()
                         }
 
                         if (current->GetScheduel()[j][k][u] != nullptr)
-                            stream << "  " +  current->GetScheduel()[j][k][u]->GetName().toStdString();
+                            stream << "  " +  current->GetScheduel()[j][k][u]->GetName().toStdString() +
+                                      "  " + "(" + ((Teacher*) current->GetScheduel()[j][k][u]->GetTeacher())->GetName()
+                                      .toStdString() + ")";
 
                         stream << "\n";
                     }
@@ -320,8 +322,6 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked()
 
         QMessageBox::information(nullptr, "Ура!", "Рассписание для всех групп было успешно создано!");
     }
-
-    std::cout << "Cleaner is working" << std::endl;
 
     for (int i = 0; i < ui->StudyGroupList->count() ; i++)
     {

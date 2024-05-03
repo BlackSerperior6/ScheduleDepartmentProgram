@@ -17,6 +17,8 @@ Lessons::Lessons(QWidget *parent, QListWidget *teachersList,
     AmountLabel = new QLabel(this);
     AmountLabel->setGeometry(280, 0, 355, 16);
 
+    AllowMerged = false;
+
     HowManyPerTwoWeeks = -1;
 
     if(shouldCallInterface)
@@ -31,6 +33,11 @@ Lessons::Lessons(QWidget *parent, QListWidget *teachersList,
 void Lessons::SetName(QString name)
 {
     Name->setText(name);
+}
+
+void Lessons::CanBeMerged(bool value)
+{
+    AllowMerged = value;
 }
 
 void Lessons::SetTeacher(QWidget *teacher)
@@ -52,6 +59,12 @@ void Lessons::operator=(Lessons &lessons)
     SetName(lessons.GetName());
     SetTeacher(lessons.GetTeacher());
     SetHowManyPerTwoWeeks(lessons.GetHowManyPerTwoWeeks());
+    CanBeMerged(lessons.CanBeMerged());
+}
+
+bool Lessons::CanBeMerged()
+{
+    return AllowMerged;
 }
 
 QString Lessons::GetName()
@@ -77,14 +90,4 @@ void Lessons::ClearAttendingGroupsNames()
 std::vector<QString>& Lessons::GetAttendingGroupsNames()
 {
     return AttendingGroupsNames;
-}
-
-bool Lessons::isAlreadyAttending(QString GroupName)
-{
-    bool result = false;
-
-    for (int i = 0; i < AttendingGroupsNames.size() && !result; i++)
-        result = AttendingGroupsNames[i] == GroupName;
-
-    return result;
 }

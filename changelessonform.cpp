@@ -18,6 +18,7 @@ ChangeLessonForm::ChangeLessonForm(QWidget *parent, Lessons *lesson, QListWidget
     ParentList = parentList;
 
     ui->NameEdit->setText(Lesson->GetName());
+    ui->AllowMergedBox->setChecked(Lesson->CanBeMerged());
 
     int setindex = -1;
 
@@ -89,6 +90,8 @@ void ChangeLessonForm::on_DialogButtons_accepted()
     }
 
     Lesson->SetTeacher(chosenTeacher);
+
+    Lesson->CanBeMerged(ui->AllowMergedBox->isChecked());
 
     Lesson->SetHowManyPerTwoWeeks(ui->AmountBox->value());
 
