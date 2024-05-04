@@ -2,6 +2,8 @@
 #include "ui_changeteacherfrom.h"
 #include <QMessageBox>
 
+#include "workslotqlistwidgetitem.h"
+
 ChangeTeacherFrom::ChangeTeacherFrom(QWidget *parent, Teacher *teacher, QListWidget *parentList) :
     QDialog(parent),
     ui(new Ui::ChangeTeacherFrom)
@@ -20,9 +22,8 @@ ChangeTeacherFrom::ChangeTeacherFrom(QWidget *parent, Teacher *teacher, QListWid
 
     for (int i = 0; i < list->count(); i++)
     {
-        QListWidgetItem *item = new QListWidgetItem;
-
         WorkSlot *slot = new WorkSlot(nullptr, false);
+        WorkSlotQListWidgetItem *item = new WorkSlotQListWidgetItem(slot);
 
         *slot = *((WorkSlot*) list->itemWidget(list->item(i)));
 
@@ -74,9 +75,8 @@ void ChangeTeacherFrom::on_DialogButtons_accepted()
 
     for (int i = 0; i < ui->WorkSlotsList->count(); i++)
     {
-        QListWidgetItem *item = new QListWidgetItem;
-
         WorkSlot *slot = new WorkSlot(nullptr, false);
+        WorkSlotQListWidgetItem *item = new WorkSlotQListWidgetItem(slot);
 
         *slot = *((WorkSlot*) ui->WorkSlotsList->itemWidget(ui->WorkSlotsList->item(i)));
 
@@ -104,8 +104,8 @@ void ChangeTeacherFrom::on_WorkSlotsList_itemDoubleClicked(QListWidgetItem *item
 
 void ChangeTeacherFrom::on_AddButton_clicked()
 {
-    QListWidgetItem *item = new QListWidgetItem;
     WorkSlot *slot = new WorkSlot(nullptr, true, ui->WorkSlotsList);
+    WorkSlotQListWidgetItem *item = new WorkSlotQListWidgetItem(slot);
 
     if (!slot->IsSet())
     {
@@ -116,6 +116,7 @@ void ChangeTeacherFrom::on_AddButton_clicked()
 
     ui->WorkSlotsList->addItem(item);
     ui->WorkSlotsList->setItemWidget(item, slot);
+    ui->WorkSlotsList->sortItems();
 }
 
 void ChangeTeacherFrom::on_WorkSlotsList_currentRowChanged(int currentRow)

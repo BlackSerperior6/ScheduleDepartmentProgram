@@ -28,11 +28,9 @@ public:
 
     void ClearAttendingGroupsNames();
 
-    bool CanBeMerged();
-
-    void CanBeMerged(bool value);
-
     std::vector<QString>& GetAttendingGroupsNames();
+
+    bool IsAlreadyAttending(QString GroupName);
 
     void operator=(Lessons &lessons);
 
@@ -47,8 +45,6 @@ private:
     QWidget *Teach;
 
     int HowManyPerTwoWeeks;
-
-    bool AllowMerged;
 
     std::vector<QString> AttendingGroupsNames;
 

@@ -76,10 +76,16 @@ void ChangeWorkSlot::on_DialogButtons_accepted()
         return;
     }
 
+    flag = !Slot->GetDay().isEmpty();
+
     Slot->SetDay(ui->DayBox->currentText());
     Slot->SetTime(ui->TimeBox->currentText());
     Slot->SetWhatWeek(ui->WeekBox->currentText());
     Slot->ChangeIsSet(true);
+
+    if (flag)
+        Parentlist->sortItems();
+
     this->close();
 }
 

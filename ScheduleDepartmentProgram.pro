@@ -13,12 +13,14 @@ SOURCES += \
     changesgdata.cpp \
     changeteacherfrom.cpp \
     changeworkslot.cpp \
+    lessonlistwidgetitem.cpp \
     lessons.cpp \
     main.cpp \
     scheduledepartment.cpp \
     studygroup.cpp \
     teacher.cpp \
-    workslot.cpp
+    workslot.cpp \
+    workslotqlistwidgetitem.cpp
 
 HEADERS += \
     ParsedWorkSlot.h \
@@ -26,11 +28,13 @@ HEADERS += \
     changesgdata.h \
     changeteacherfrom.h \
     changeworkslot.h \
+    lessonlistwidgetitem.h \
     lessons.h \
     scheduledepartment.h \
     studygroup.h \
     teacher.h \
-    workslot.h
+    workslot.h \
+    workslotqlistwidgetitem.h
 
 FORMS += \
     changelessonform.ui \

@@ -3,6 +3,7 @@
 #include <QMessageBox>
 
 #include "lessons.h"
+#include "lessonlistwidgetitem.h"
 #include <changelessonform.h>
 
 ChangeSgData::ChangeSgData(QWidget *parent, StudyGroup *group, QListWidget *teachers,
@@ -24,9 +25,8 @@ ChangeSgData::ChangeSgData(QWidget *parent, StudyGroup *group, QListWidget *teac
 
     for (int i = 0; i < list->count(); i++)
     {
-        QListWidgetItem *item = new QListWidgetItem;
-
         Lessons *lesson = new Lessons(nullptr, nullptr, nullptr, false);
+        LessonListWidgetItem *item = new LessonListWidgetItem(lesson);
 
         *lesson = *((Lessons*) list->itemWidget(list->item(i)));
 
@@ -83,9 +83,8 @@ void ChangeSgData::on_Buttons_accepted()
 
     for (int i = 0; i < ui->LessonsList->count(); i++)
     {
-        QListWidgetItem *item = new QListWidgetItem;
-
         Lessons *lesson = new Lessons(nullptr, nullptr, nullptr, false);
+        LessonListWidgetItem *item = new LessonListWidgetItem(lesson);
 
         *lesson = *((Lessons*) ui->LessonsList->itemWidget(ui->LessonsList->item(i)));
 
@@ -113,8 +112,8 @@ void ChangeSgData::on_LessonsList_itemDoubleClicked(QListWidgetItem *item)
 
 void ChangeSgData::on_AddButton_clicked()
 {
-    QListWidgetItem *item = new QListWidgetItem;
     Lessons *lesson = new Lessons(nullptr, Teachers, ui->LessonsList);
+    LessonListWidgetItem *item = new LessonListWidgetItem(lesson);
 
     if (lesson->GetName().isEmpty())
     {
@@ -125,6 +124,7 @@ void ChangeSgData::on_AddButton_clicked()
 
     ui->LessonsList->addItem(item);
     ui->LessonsList->setItemWidget(item, lesson);
+    ui->LessonsList->sortItems();
 }
 
 void ChangeSgData::on_LessonsList_currentRowChanged(int currentRow)

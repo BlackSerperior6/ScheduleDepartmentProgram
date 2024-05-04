@@ -18,7 +18,6 @@ ChangeLessonForm::ChangeLessonForm(QWidget *parent, Lessons *lesson, QListWidget
     ParentList = parentList;
 
     ui->NameEdit->setText(Lesson->GetName());
-    ui->AllowMergedBox->setChecked(Lesson->CanBeMerged());
 
     int setindex = -1;
 
@@ -48,7 +47,7 @@ void ChangeLessonForm::on_DialogButtons_accepted()
 {
     if (ui->NameEdit->text().isEmpty())
     {
-        QMessageBox::information(nullptr, "Ошибка!", "Поле имени не может быть пустым!");
+        QMessageBox::information(nullptr, "Ошибка!", "Поле названия не может быть пустым!");
         return;
     }
 
@@ -72,28 +71,31 @@ void ChangeLessonForm::on_DialogButtons_accepted()
         }
     }
 
+    bool flag = !Lesson->GetName().isEmpty();
+
     Lesson->SetName(name);
 
-    bool flag = false;
+    bool flag2 = false;
 
     Teacher *chosenTeacher;
 
-    for (int i = 0; i < Teachers->count() && !flag; i++)
+    for (int i = 0; i < Teachers->count() && !flag2; i++)
     {
         Teacher* current = (Teacher*) Teachers->itemWidget(Teachers->item(i));
 
-        flag = current->GetName() ==
+        flag2 = current->GetName() ==
                 ui->TeacherList->currentText();
 
-        if (flag)
+        if (flag2)
             chosenTeacher = current;
     }
 
     Lesson->SetTeacher(chosenTeacher);
 
-    Lesson->CanBeMerged(ui->AllowMergedBox->isChecked());
-
     Lesson->SetHowManyPerTwoWeeks(ui->AmountBox->value());
+
+    if (flag)
+        ParentList->sortItems();
 
     this->close();
 }
