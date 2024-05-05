@@ -201,8 +201,6 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked()
                         currentSg->GetScheduel()[slot.DayIndex]
                                 [slot.TimeIndex][slot.WeekIndex] = currentLesson;
 
-                        currentLesson->GetAttendingGroupsNames().push_back(currentSg->GetName());
-
                         subFlag = true;
                     }
                 }
@@ -230,9 +228,6 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked()
                             currentSg->GetScheduel()[slot.DayIndex]
                                     [slot.TimeIndex][slot.WeekIndex] = currentTeacher
                                     ->GetScheduel()[slot.DayIndex][slot.TimeIndex][slot.WeekIndex];
-
-                            currentTeacher->GetScheduel()[slot.DayIndex][slot.TimeIndex][slot.WeekIndex]
-                                    ->GetAttendingGroupsNames().push_back(currentSg->GetName());
 
                             subFlag = true;
                         }
@@ -413,18 +408,7 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked()
                         }
 
                         if (current->GetScheduel()[j][k][u] != nullptr)
-                        {
-                            QString Groups = "(" + current->GetScheduel()[j][k][u]->GetAttendingGroupsNames()[0];
-
-                            for (int i = 1; i < current->GetScheduel()[j][k][u]->GetAttendingGroupsNames().size();
-                                 i++)
-                                Groups += "; " + current->GetScheduel()[j][k][u]->GetAttendingGroupsNames()[i];
-
-                            Groups += ")";
-
-                            stream << "  " +  current->GetScheduel()[j][k][u]->GetName().toStdString() +
-                                      "  " + Groups.toStdString();
-                        }
+                            stream << "  " +  current->GetScheduel()[j][k][u]->GetName().toStdString();
 
                         stream << "\n";
                     }
@@ -441,17 +425,7 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked()
     }
 
     for (int i = 0; i < ui->StudyGroupList->count() ; i++)
-    {
-        StudyGroup *current = (StudyGroup*) ui->StudyGroupList->itemWidget(ui->StudyGroupList->item(i));
-        current->ClearScheduel();
-
-        for (int j = 0; j < current->GetLessons()->count(); j++)
-        {
-            ((Lessons*) current->GetLessons()->
-                    itemWidget(current->GetLessons()->item(j)))
-                    ->ClearAttendingGroupsNames();
-        }
-    }
+        ((StudyGroup*) ui->StudyGroupList->itemWidget(ui->StudyGroupList->item(i)))->ClearScheduel();
 
     for (int i = 0; i < ui->TeacherList->count(); i++)
         ((Teacher*) ui->TeacherList->itemWidget(ui->TeacherList->item(i)))->ClearScheduel();

@@ -71,8 +71,6 @@ void ChangeWorkSlot::on_DialogButtons_accepted()
     {
         QMessageBox::information(nullptr, "Ошибка!",
                                  "Такой элемент уже есть в списке");
-
-        Slot->ChangeIsSet(false);
         return;
     }
 
@@ -92,7 +90,6 @@ void ChangeWorkSlot::on_DialogButtons_accepted()
 
 void ChangeWorkSlot::on_DialogButtons_rejected()
 {
-    Slot->ChangeIsSet(false);
     this->close();
 }
 

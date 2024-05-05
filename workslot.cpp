@@ -14,6 +14,8 @@ WorkSlot::WorkSlot(QWidget *parent, bool shouldCallDialogs,
     WhatWeek = new QLabel(this);
     WhatWeek->setGeometry(150, 0, 21, 16);
 
+    isSet = false;
+
     if (shouldCallDialogs)
     {
         ChangeWorkSlot *win = new ChangeWorkSlot(nullptr, this, parentList);

@@ -54,16 +54,6 @@ void Lessons::operator=(Lessons &lessons)
     SetHowManyPerTwoWeeks(lessons.GetHowManyPerTwoWeeks());
 }
 
-bool Lessons::IsAlreadyAttending(QString GroupName)
-{
-    bool result = false;
-
-    for (int i = 0; i < AttendingGroupsNames.size() && !result; i++)
-        result = AttendingGroupsNames[i] == GroupName;
-
-    return result;
-}
-
 QString Lessons::GetName()
 {
     return Name->text();
@@ -77,14 +67,4 @@ QWidget *Lessons::GetTeacher()
 int Lessons::GetHowManyPerTwoWeeks()
 {
     return HowManyPerTwoWeeks;
-}
-
-void Lessons::ClearAttendingGroupsNames()
-{
-    AttendingGroupsNames.clear();
-}
-
-std::vector<QString>& Lessons::GetAttendingGroupsNames()
-{
-    return AttendingGroupsNames;
 }

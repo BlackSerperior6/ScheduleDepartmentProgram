@@ -26,12 +26,6 @@ public:
 
     void SetHowManyPerTwoWeeks(int amount);
 
-    void ClearAttendingGroupsNames();
-
-    std::vector<QString>& GetAttendingGroupsNames();
-
-    bool IsAlreadyAttending(QString GroupName);
-
     void operator=(Lessons &lessons);
 
 private:
@@ -45,8 +39,6 @@ private:
     QWidget *Teach;
 
     int HowManyPerTwoWeeks;
-
-    std::vector<QString> AttendingGroupsNames;
 
 signals:
 
