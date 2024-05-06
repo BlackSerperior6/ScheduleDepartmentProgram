@@ -38,7 +38,11 @@ void ScheduleDepartment::on_AddStudyGroupButton_clicked()
     StudyGroup *group = new StudyGroup(nullptr, ui->TeacherList, ui->StudyGroupList);
 
     if (group->GetName().isEmpty() || group->GetLessons()->count() == 0)
+    {
+        delete item;
+        delete group;
         return;
+    }
 
     ui->StudyGroupList->addItem(item);
     ui->StudyGroupList->setItemWidget(item, group);
@@ -180,6 +184,7 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked()
 
                 for (int p = 0; p < currentTeacher->GetWorkSlots()->count() && !subFlag; p++)
                 {
+
                     WorkSlot* currentWorkSlot = (WorkSlot*)
                             currentTeacher->GetWorkSlots()
                             ->itemWidget(currentTeacher->GetWorkSlots()->item(p));
@@ -191,12 +196,15 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked()
                             (slot.DayIndex != 5 || currentSg->IsStudyingAtSaturdays());
 
                     if (currentTeacher->GetScheduel()[slot.DayIndex]
-                            [slot.TimeIndex][slot.WeekIndex]
+                            [slot.TimeIndex][slot.WeekIndex].lesson
                             == nullptr && NoProblemWithTheGroup)
                     {
 
                         currentTeacher->GetScheduel()[slot.DayIndex]
-                                [slot.TimeIndex][slot.WeekIndex] = currentLesson;
+                                [slot.TimeIndex][slot.WeekIndex].lesson = currentLesson;
+
+                        currentTeacher->GetScheduel()[slot.DayIndex]
+                                [slot.TimeIndex][slot.WeekIndex].AttendingGroupsNames.push_back(currentSg->GetName());
 
                         currentSg->GetScheduel()[slot.DayIndex]
                                 [slot.TimeIndex][slot.WeekIndex] = currentLesson;
@@ -221,15 +229,67 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked()
 
 
                         if (NoProblemWithTheGroup && currentTeacher->GetScheduel()[slot.DayIndex]
-                                [slot.TimeIndex][slot.WeekIndex] != nullptr
-                                && currentTeacher->GetScheduel()[slot.DayIndex]
-                                [slot.TimeIndex][slot.WeekIndex]->GetName() == currentLesson->GetName())
+                                [slot.TimeIndex][slot.WeekIndex].lesson != nullptr
+                                &&  currentTeacher->GetScheduel()[slot.DayIndex]
+                                [slot.TimeIndex][slot.WeekIndex].lesson != nullptr &&
+                                currentTeacher->GetScheduel()[slot.DayIndex]
+                                [slot.TimeIndex][slot.WeekIndex].lesson->GetName() == currentLesson->GetName())
                         {
                             currentSg->GetScheduel()[slot.DayIndex]
-                                    [slot.TimeIndex][slot.WeekIndex] = currentTeacher
-                                    ->GetScheduel()[slot.DayIndex][slot.TimeIndex][slot.WeekIndex];
+                                    [slot.TimeIndex][slot.WeekIndex] = currentLesson;
+
+                            currentTeacher->GetScheduel()[slot.DayIndex]
+                                    [slot.TimeIndex][slot.WeekIndex].AttendingGroupsNames.push_back(currentSg->GetName());
 
                             subFlag = true;
+                        }
+                    }
+                }
+
+                if (!subFlag) // slot - время учителя, которому надо тыкнуть пару, subslot - время учителя, который занял место для пары
+                {
+                    for (int p = 0; p < currentTeacher->GetWorkSlots()->count() && !subFlag; p++)
+                    {
+                        ParsedWorkSlot slot = ((WorkSlot*)
+                                               currentTeacher->GetWorkSlots()
+                                               ->itemWidget(currentTeacher->GetWorkSlots()->item(p)))->ParseToIndexes();
+
+                        if ((slot.DayIndex == 5 && !currentSg->IsStudyingAtSaturdays()) ||
+                                currentSg->GetScheduel()[slot.DayIndex][slot.TimeIndex][slot.WeekIndex] == nullptr)
+                            continue;
+
+                        Teacher *checking = (Teacher*) currentSg->GetScheduel()[slot.DayIndex][slot.TimeIndex][slot.WeekIndex]->GetTeacher();
+
+                        for (int a = 0; a < checking->GetWorkSlots()->count() && !subFlag; a++)
+                        {
+                            ParsedWorkSlot subSlot = ((WorkSlot*)
+                                                      checking->GetWorkSlots()
+                                                      ->itemWidget(checking->GetWorkSlots()->item(a)))->ParseToIndexes();
+
+                            if (currentSg->GetScheduel()[subSlot.DayIndex][subSlot.TimeIndex][subSlot.WeekIndex] == nullptr &&
+                                    checking->GetScheduel()[subSlot.DayIndex][subSlot.TimeIndex][subSlot.WeekIndex].lesson == nullptr)
+                            {
+                                currentSg->GetScheduel()[subSlot.DayIndex][subSlot.TimeIndex][subSlot.WeekIndex] =
+                                checking->GetScheduel()[slot.DayIndex][slot.TimeIndex][slot.WeekIndex].lesson;
+
+                                currentSg->GetScheduel()[slot.DayIndex][slot.TimeIndex][slot.WeekIndex] = currentLesson;
+
+                                currentTeacher->GetScheduel()[slot.DayIndex][slot.TimeIndex][slot.WeekIndex].lesson = currentLesson;
+                                currentTeacher->GetScheduel()[slot.DayIndex][slot.TimeIndex][slot.WeekIndex]
+                                        .AttendingGroupsNames.push_back(currentSg->GetName());
+
+                                checking->GetScheduel()[subSlot.DayIndex][subSlot.TimeIndex][subSlot.WeekIndex].lesson =
+                                        checking->GetScheduel()[slot.DayIndex][slot.TimeIndex][slot.WeekIndex].lesson;
+
+                                checking->GetScheduel()[slot.DayIndex][slot.TimeIndex][slot.WeekIndex].lesson = nullptr;
+
+                                checking->GetScheduel()[subSlot.DayIndex][subSlot.TimeIndex][subSlot.WeekIndex].AttendingGroupsNames =
+                                        checking->GetScheduel()[slot.DayIndex][slot.TimeIndex][slot.WeekIndex].AttendingGroupsNames;
+
+                                checking->GetScheduel()[slot.DayIndex][slot.TimeIndex][slot.WeekIndex].AttendingGroupsNames.clear();
+
+                                subFlag = true;
+                            }
                         }
                     }
                 }
@@ -241,188 +301,197 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked()
 
     if (!mainFlag)
         QMessageBox::information(nullptr, "Ошибка!",
-                                 "Невозможно составить рассписание при таких входных данных");
-    else
+                                 "Не получилось полностью сгенерировать рассписание. Генериуем файлы с тем, что удалось поставить");
+
+
+    for (int i = 0; i < ui->StudyGroupList->count(); i++)
     {
-        for (int i = 0; i < ui->StudyGroupList->count(); i++)
+        StudyGroup* current = (StudyGroup*) ui->StudyGroupList->itemWidget(ui->StudyGroupList->item(i));
+
+        std::ofstream stream(current->GetName().toStdString() + ".txt");
+
+        for (int j = 0; j < 6; j++)
         {
-            StudyGroup* current = (StudyGroup*) ui->StudyGroupList->itemWidget(ui->StudyGroupList->item(i));
-
-            std::ofstream stream(current->GetName().toStdString() + ".txt");
-
-            for (int j = 0; j < 6; j++)
+            switch (j)
             {
-                switch (j)
+            case 0:
+                stream << "Понедельник:";
+                break;
+            case 1:
+                stream << "Вторник:";
+                break;
+            case 2:
+                stream << "Среда:";
+                break;
+            case 3:
+                stream << "Четверг:";
+                break;
+            case 4:
+                stream << "Пятница:";
+                break;
+            case 5:
+                stream << "Суббота:";
+                break;
+            }
+
+            stream << "\n";
+
+            for (int k = 0; k < 6; k++)
+            {
+                stream << "  ";
+
+                switch (k)
                 {
                 case 0:
-                    stream << "Понедельник:";
+                    stream << "8:00:";
                     break;
                 case 1:
-                    stream << "Вторник:";
+                    stream << "9:40:";
                     break;
                 case 2:
-                    stream << "Среда:";
+                    stream << "11:30";
                     break;
                 case 3:
-                    stream << "Четверг:";
+                    stream << "13:20:";
                     break;
                 case 4:
-                    stream << "Пятница:";
+                    stream << "15:00";
                     break;
                 case 5:
-                    stream << "Суббота:";
+                    stream << "16:40";
                     break;
                 }
 
                 stream << "\n";
 
-                for (int k = 0; k < 6; k++)
+                for (int u = 0; u < 2; u++)
                 {
-                    stream << "  ";
+                    stream << "         ";
 
-                    switch (k)
+                    switch (u)
                     {
                     case 0:
-                        stream << "8:00:";
+                        stream << "1-ая неделя:";
                         break;
                     case 1:
-                        stream << "9:40:";
-                        break;
-                    case 2:
-                        stream << "11:30";
-                        break;
-                    case 3:
-                        stream << "13:20:";
-                        break;
-                    case 4:
-                        stream << "15:00";
-                        break;
-                    case 5:
-                        stream << "16:40";
+                        stream << "2-ая неделя:";
                         break;
                     }
 
+                    if (current->GetScheduel()[j][k][u] != nullptr)
+                        stream << "  " +  current->GetScheduel()[j][k][u]->GetName().toStdString() +
+                                  "  " + "(" + ((Teacher*) current->GetScheduel()[j][k][u]->GetTeacher())->GetName()
+                                  .toStdString() + ")";
                     stream << "\n";
-
-                    for (int u = 0; u < 2; u++)
-                    {
-                        stream << "         ";
-
-                        switch (u)
-                        {
-                        case 0:
-                            stream << "1-ая неделя:";
-                            break;
-                        case 1:
-                            stream << "2-ая неделя:";
-                            break;
-                        }
-
-                        if (current->GetScheduel()[j][k][u] != nullptr)
-                            stream << "  " +  current->GetScheduel()[j][k][u]->GetName().toStdString() +
-                                      "  " + "(" + ((Teacher*) current->GetScheduel()[j][k][u]->GetTeacher())->GetName()
-                                      .toStdString() + ")";
-
-                        stream << "\n";
-                    }
                 }
-
-                stream << "\n\n\n";
             }
 
-            stream.close();
+            stream << "\n\n\n";
         }
 
-        for (int i = 0; i < ui->TeacherList->count(); i++)
-        {
-            Teacher* current = (Teacher*) ui->TeacherList->itemWidget(ui->TeacherList->item(i));
-
-            std::ofstream stream(current->GetName().toStdString() + ".txt");
-
-            for (int j = 0; j < 6; j++)
-            {
-                switch (j)
-                {
-                case 0:
-                    stream << "Понедельник:";
-                    break;
-                case 1:
-                    stream << "Вторник:";
-                    break;
-                case 2:
-                    stream << "Среда:";
-                    break;
-                case 3:
-                    stream << "Четверг:";
-                    break;
-                case 4:
-                    stream << "Пятница:";
-                    break;
-                case 5:
-                    stream << "Суббота:";
-                    break;
-                }
-
-                stream << "\n";
-
-                for (int k = 0; k < 6; k++)
-                {
-                    stream << "  ";
-
-                    switch (k)
-                    {
-                    case 0:
-                        stream << "8:00:";
-                        break;
-                    case 1:
-                        stream << "9:40:";
-                        break;
-                    case 2:
-                        stream << "11:30";
-                        break;
-                    case 3:
-                        stream << "13:20:";
-                        break;
-                    case 4:
-                        stream << "15:00";
-                        break;
-                    case 5:
-                        stream << "16:40";
-                        break;
-                    }
-
-                    stream << "\n";
-
-                    for (int u = 0; u < 2; u++)
-                    {
-                        stream << "         ";
-
-                        switch (u)
-                        {
-                        case 0:
-                            stream << "1-ая неделя:";
-                            break;
-                        case 1:
-                            stream << "2-ая неделя:";
-                            break;
-                        }
-
-                        if (current->GetScheduel()[j][k][u] != nullptr)
-                            stream << "  " +  current->GetScheduel()[j][k][u]->GetName().toStdString();
-
-                        stream << "\n";
-                    }
-                }
-
-                stream << "\n\n\n";
-            }
-
-            stream.close();
-        }
-
-        QMessageBox::information(nullptr, "Ура!", "Рассписание для всех групп и учителей было"
-                                                  "успешно создано!");
+        stream.close();
     }
+
+    for (int i = 0; i < ui->TeacherList->count(); i++)
+    {
+        Teacher* current = (Teacher*) ui->TeacherList->itemWidget(ui->TeacherList->item(i));
+
+        std::ofstream stream(current->GetName().toStdString() + ".txt");
+
+        for (int j = 0; j < 6; j++)
+        {
+            switch (j)
+            {
+            case 0:
+                stream << "Понедельник:";
+                break;
+            case 1:
+                stream << "Вторник:";
+                break;
+            case 2:
+                stream << "Среда:";
+                break;
+            case 3:
+                stream << "Четверг:";
+                break;
+            case 4:
+                stream << "Пятница:";
+                break;
+            case 5:
+                stream << "Суббота:";
+                break;
+            }
+
+            stream << "\n";
+
+            for (int k = 0; k < 6; k++)
+            {
+                stream << "  ";
+
+                switch (k)
+                {
+                case 0:
+                    stream << "8:00:";
+                    break;
+                case 1:
+                    stream << "9:40:";
+                    break;
+                case 2:
+                    stream << "11:30";
+                    break;
+                case 3:
+                    stream << "13:20:";
+                    break;
+                case 4:
+                    stream << "15:00";
+                    break;
+                case 5:
+                    stream << "16:40";
+                    break;
+                }
+
+                stream << "\n";
+
+                for (int u = 0; u < 2; u++)
+                {
+                    stream << "         ";
+
+                    switch (u)
+                    {
+                    case 0:
+                        stream << "1-ая неделя:";
+                        break;
+                    case 1:
+                        stream << "2-ая неделя:";
+                        break;
+                    }
+
+                    if (current->GetScheduel()[j][k][u].lesson != nullptr)
+                    {
+                        QString Groups = "( " + current->GetScheduel()[j][k][u].AttendingGroupsNames[0];
+
+                        for (int w = 1; w < current->GetScheduel()[j][k][u].AttendingGroupsNames.size(); w++)
+                            Groups += " " + current->GetScheduel()[j][k][u].AttendingGroupsNames[w];
+
+                        Groups += ")";
+
+                        stream << " " << current->GetScheduel()[j][k][u].lesson->GetName().toStdString() + " " + Groups.toStdString();
+                    }
+
+                    stream << "\n";
+                }
+            }
+
+            stream << "\n\n\n";
+        }
+
+        stream.close();
+    }
+
+    if (mainFlag)
+        QMessageBox::information(nullptr, "Ура!", "Рассписание для всех групп и учителей было"
+                                                  " успешно создано!");
+
 
     for (int i = 0; i < ui->StudyGroupList->count() ; i++)
         ((StudyGroup*) ui->StudyGroupList->itemWidget(ui->StudyGroupList->item(i)))->ClearScheduel();

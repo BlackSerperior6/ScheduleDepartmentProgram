@@ -9,7 +9,7 @@
 #include <vector>
 
 #include "workslot.h"
-#include "lessons.h"
+#include <TeacherScheduelElement.h>
 
 class Teacher : public QWidget
 {
@@ -23,7 +23,7 @@ public:
 
     QString GetName();
 
-    std::vector<std::vector<std::vector<Lessons*>>>& GetScheduel();
+    std::vector<std::vector<std::vector<ScheduelTeacherElement>>>& GetScheduel();
 
     void ClearScheduel();
 
@@ -35,7 +35,7 @@ private:
 
     QListWidget *WorkSlots;
 
-    std::vector<std::vector<std::vector<Lessons*>>> Scheduel;
+    std::vector<std::vector<std::vector<ScheduelTeacherElement>>> Scheduel;
 
 signals:
 

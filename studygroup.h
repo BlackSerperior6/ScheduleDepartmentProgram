@@ -31,6 +31,8 @@ public:
 
     void ClearScheduel();
 
+    static inline StudyGroup* GetGroupByName(QString& name, QListWidget *list);
+
 signals:
 
 private:
