@@ -36,7 +36,7 @@ void Teacher::SetName(QString name)
     Name->setText(name);
 }
 
-std::vector<std::vector<std::vector<ScheduelTeacherElement>>>& Teacher::GetScheduel()
+std::vector<std::vector<std::vector<Lessons*>>>& Teacher::GetScheduel()
 {
     return Scheduel;
 }
@@ -46,6 +46,6 @@ void Teacher::ClearScheduel()
     Scheduel.clear();
 
     Scheduel = std::vector<std::vector
-            <std::vector<ScheduelTeacherElement>>>(6, std::vector<std::vector<ScheduelTeacherElement>>
-                                     (6, std::vector<ScheduelTeacherElement>(2)));
+            <std::vector<Lessons*>>>(6, std::vector<std::vector<Lessons*>>
+                                     (6, std::vector<Lessons*>(2, nullptr)));
 }

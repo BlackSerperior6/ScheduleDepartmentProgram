@@ -124,7 +124,7 @@ void ChangeSgData::on_AddButton_clicked()
 
     ui->LessonsList->addItem(item);
     ui->LessonsList->setItemWidget(item, lesson);
-    ui->LessonsList->sortItems();
+    ui->LessonsList->sortItems(Qt::DescendingOrder);
 }
 
 void ChangeSgData::on_LessonsList_currentRowChanged(int currentRow)

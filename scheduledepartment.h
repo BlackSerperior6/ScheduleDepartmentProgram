@@ -36,10 +36,13 @@ private slots:
 
     void on_GenerateScheduelButton_clicked();
 
+    void on_ChooseFolderButton_clicked();
+
 private:
     Ui::ScheduleDepartment *ui;
 
     int StudentGroupsRowSelected;
     int TeachersGroupsRowSelected;
+    QString FilePath;
 };
 #endif // SCHEDULEDEPARTMENT_H

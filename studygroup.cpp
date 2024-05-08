@@ -66,17 +66,3 @@ void StudyGroup::ClearScheduel()
             <std::vector<Lessons*>>>(6, std::vector<std::vector<Lessons*>>
                                      (6, std::vector<Lessons*>(2, nullptr)));
 }
-
-StudyGroup* StudyGroup::GetGroupByName(QString &name, QListWidget *list)
-{
-    StudyGroup *result = nullptr;
-
-    for (int i = 0; i < list->count() && result == nullptr; i++)
-    {
-        StudyGroup* current = (StudyGroup*) list->itemWidget(list->item(i));
-        if (current->GetName() == name)
-            result = current;
-    }
-
-    return result;
-}

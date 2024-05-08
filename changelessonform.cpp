@@ -95,7 +95,7 @@ void ChangeLessonForm::on_DialogButtons_accepted()
     Lesson->SetHowManyPerTwoWeeks(ui->AmountBox->value());
 
     if (flag)
-        ParentList->sortItems();
+        ParentList->sortItems(Qt::DescendingOrder);
 
     this->close();
 }
@@ -104,4 +104,3 @@ void ChangeLessonForm::on_DialogButtons_rejected()
 {
     this->close();
 }
-

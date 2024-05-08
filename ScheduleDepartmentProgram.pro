@@ -24,7 +24,6 @@ SOURCES += \
 
 HEADERS += \
     ParsedWorkSlot.h \
-    TeacherScheduelElement.h \
     changelessonform.h \
     changesgdata.h \
     changeteacherfrom.h \
