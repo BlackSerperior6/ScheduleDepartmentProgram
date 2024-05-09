@@ -17,6 +17,7 @@ ChangeLessonForm::ChangeLessonForm(QWidget *parent, Lessons *lesson, QListWidget
     Teachers = teachers;
     ParentList = parentList;
 
+    //Задаем TextEditу название редактируемого урока
     ui->NameEdit->setText(Lesson->GetName());
 
     int setindex = -1;
@@ -31,10 +32,11 @@ ChangeLessonForm::ChangeLessonForm(QWidget *parent, Lessons *lesson, QListWidget
             setindex = i;
     }
 
+    //Задаем преподователя, который на момент редактирования ввел урок (задаем первого в списке, если никто не ввел)
     if (setindex != -1)
         ui->TeacherList->setCurrentIndex(setindex);
 
-    if(Lesson->GetHowManyPerTwoWeeks() != -1)
+    if(Lesson->GetHowManyPerTwoWeeks() != -1) //Задаем кол-во пар на две недели (1 по умолчанию)
         ui->AmountBox->setValue(Lesson->GetHowManyPerTwoWeeks());
 }
 
@@ -45,7 +47,7 @@ ChangeLessonForm::~ChangeLessonForm()
 
 void ChangeLessonForm::on_DialogButtons_accepted()
 {
-    if (ui->NameEdit->text().isEmpty())
+    if (ui->NameEdit->text().isEmpty()) //Если поле имени пусто, то сообщаем о ошибке
     {
         QMessageBox::information(nullptr, "Ошибка!", "Поле названия не может быть пустым!");
         return;
@@ -53,7 +55,7 @@ void ChangeLessonForm::on_DialogButtons_accepted()
 
     QString name = ui->NameEdit->text();
 
-    if (ParentList->count() != 0)
+    if (ParentList->count() != 0) //Проверка на то, что списке группы нету уже урока с таким названием
     {
         bool flag = false;
 
@@ -64,13 +66,14 @@ void ChangeLessonForm::on_DialogButtons_accepted()
             flag = current != Lesson && current->GetName() == name;
         }
 
-        if (flag)
+        if (flag) //Если есть, то сообщаем о ошибке
         {
             QMessageBox::information(nullptr, "Ошибка!", "Урок с таким названием уже есть!");
             return;
         }
     }
 
+    //Флаг. обозначающий, что элемент именно редактируют, а не создают новый
     bool flag = !Lesson->GetName().isEmpty();
 
     Lesson->SetName(name);
@@ -79,7 +82,7 @@ void ChangeLessonForm::on_DialogButtons_accepted()
 
     Teacher *chosenTeacher;
 
-    for (int i = 0; i < Teachers->count() && !flag2; i++)
+    for (int i = 0; i < Teachers->count() && !flag2; i++) //Задаем учителя с указанным в форме именем
     {
         Teacher* current = (Teacher*) Teachers->itemWidget(Teachers->item(i));
 
@@ -90,17 +93,17 @@ void ChangeLessonForm::on_DialogButtons_accepted()
             chosenTeacher = current;
     }
 
-    Lesson->SetTeacher(chosenTeacher);
+    Lesson->SetTeacher(chosenTeacher); //Задаем учителя
 
-    Lesson->SetHowManyPerTwoWeeks(ui->AmountBox->value());
+    Lesson->SetHowManyPerTwoWeeks(ui->AmountBox->value()); //Задаем кол-во пар на 2 недели
 
-    if (flag)
+    if (flag) //Если элемент именно отредатировали, а нед добавили, то сортируем родительский список
         ParentList->sortItems(Qt::DescendingOrder);
 
-    this->close();
+    this->close(); //Закрываем интерфейс
 }
 
 void ChangeLessonForm::on_DialogButtons_rejected()
 {
-    this->close();
+    this->close(); //В случае отказа от редактирования закрываем интерфейс
 }

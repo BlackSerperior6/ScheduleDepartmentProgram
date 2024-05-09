@@ -11,7 +11,7 @@ namespace Ui {
 class ChangeLessonForm;
 }
 
-class ChangeLessonForm : public QDialog
+class ChangeLessonForm : public QDialog //Форма для редактирования урока
 {
     Q_OBJECT
 
@@ -28,11 +28,11 @@ private slots:
 private:
     Ui::ChangeLessonForm *ui;
 
-    Lessons *Lesson;
+    Lessons *Lesson; //Редактируемый урок
 
-    QListWidget *ParentList;
+    QListWidget *ParentList; //Список, из которого был взят урок
 
-    QListWidget *Teachers;
+    QListWidget *Teachers; //Список учителей
 };
 
 #endif // CHANGELESSONFORM_H

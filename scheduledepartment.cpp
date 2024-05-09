@@ -24,6 +24,7 @@ ScheduleDepartment::ScheduleDepartment(QWidget *parent) //Инициализац
     //Инициализация нужных переменных
     StudentGroupsRowSelected = -1; //Выбранный ряд в списке учеников
     TeachersGroupsRowSelected = -1; //В списке учителей
+
     FilePath = ""; //Путь к папке, в которую будут отправлены файлы
 }
 
@@ -32,7 +33,7 @@ ScheduleDepartment::~ScheduleDepartment()
     delete ui;
 }
 
-void ScheduleDepartment::on_AddStudyGroupButton_clicked() //Кнопка добавления группы
+void ScheduleDepartment::on_AddStudyGroupButton_clicked()
 {
     if (ui->TeacherList->count() == 0) //Нельзя добавить группу, если нет учителя
     {
@@ -78,14 +79,14 @@ void ScheduleDepartment::on_StudyGroupList_currentRowChanged(int currentRow)
 
 void ScheduleDepartment::on_ClearSudyGroupButton_clicked()
 {
-    ui->StudyGroupList->clear(); //Очищаем список
+    ui->StudyGroupList->clear();
 }
 
 void ScheduleDepartment::on_StudyGroupList_itemDoubleClicked(QListWidgetItem *item) //Метод редактирования группы
 {
     StudyGroup *group =  (StudyGroup*) ui->StudyGroupList->itemWidget(item); //Получаем группу
 
-    //Вызваем интерфейс для редактирования группы
+    //Вызываем интерфейс для редактирования группы
     ChangeSgData *win = new ChangeSgData(nullptr, group, ui->TeacherList, ui->StudyGroupList);
 
     win->setModal(true);
@@ -119,12 +120,12 @@ void ScheduleDepartment::on_TeacherList_currentRowChanged(int currentRow)
 
 void ScheduleDepartment::on_RemoveTeacherButton_clicked()
 {
-    if (TeachersGroupsRowSelected == -1) //Ничего не делаемЮ, если никто не выбран
+    if (TeachersGroupsRowSelected == -1) //Ничего не делаем, если никто не выбран
         return;
 
     bool flag = false;
 
-    //Проферка на то, преподает ли преподователь в какой - либо группе
+    //Проверка на то, не преподает ли преподователь в какой - либо группе
     for (int i = 0; i < ui->StudyGroupList->count() && !flag; i++)
     {
         StudyGroup* group = (StudyGroup*)
@@ -147,7 +148,7 @@ void ScheduleDepartment::on_RemoveTeacherButton_clicked()
         }
     }
 
-    if (flag)
+    if (flag) //Запрещаем удаление, если преподает
         return;
 
     //Удаляем элемент
@@ -162,7 +163,7 @@ void ScheduleDepartment::on_TeacherList_itemDoubleClicked(QListWidgetItem *item)
     //Берем преподователя
     Teacher *teach =  (Teacher*) ui->TeacherList->itemWidget(item);
 
-    //Вызваем интерфейс для его редактирования
+    //Вызываем интерфейс для его редактирования
     ChangeTeacherFrom *win = new ChangeTeacherFrom(nullptr, teach, ui->TeacherList);
 
     win->setModal(true);
@@ -179,15 +180,15 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked() //Генераци�
     }
     else if (!QDir(FilePath).exists()) //Доп. проверка на то, что папка все еще существует
     {
-        //Если не существует, то
+        //Если не существует, то:
 
-        //Выводим сообщение о ошибке
+        //1. Выводим сообщение о ошибке
         QMessageBox::information(nullptr, "Ошибка!", "Что то случилось с выходной папкой. Укажите новую!");
 
-        //Возвращаем надпись о том, что папка не указана
+        //2. Возвращаем надпись о том, что папка не указана
         ui->NoPathLable->setText("Не указан путь к папке для выходного продукта!");
 
-        //Очищаем путь
+        //3. Очищаем путь
         FilePath = "";
 
         return;
@@ -230,9 +231,9 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked() //Генераци�
                             currentTeacher->GetWorkSlots()
                             ->itemWidget(currentTeacher->GetWorkSlots()->item(p));
 
-                    ParsedWorkSlot slot = currentWorkSlot->ParseToIndexes(); //Переводим время в индексы
+                    ParsedWorkSlot slot = currentWorkSlot->ParseToIndexes(); //Переводим время в индексы массива
 
-                    //true - у группы свободно время и либо пара не в субботу, либо группа учится в субботу
+                    //true - у группы свободно время с учетом того, учится ли группа в субботу
                     bool NoProblemWithTheGroup = currentSg->GetScheduel()[slot.DayIndex]
                             [slot.TimeIndex][slot.WeekIndex] == nullptr &&
                             (slot.DayIndex != 5 || currentSg->IsStudyingAtSaturdays());
@@ -253,17 +254,18 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked() //Генераци�
                     }
                 }
 
-                //Если не вышло поставить урок
+                //Если не вышло поставить урок циклом выше
 
                 if (!subFlag)
                 {
+                    //Вновь пытаемся найти время, путем перестановки предмета другого педагога
                     for (int p = 0; p < currentTeacher->GetWorkSlots()->count() && !subFlag; p++)
                     {
-                        ParsedWorkSlot slot = ((WorkSlot*)
+                        ParsedWorkSlot slot = ((WorkSlot*)  //Время текущего учителя, на это место хоти поставить пару
                                                currentTeacher->GetWorkSlots()
                                                ->itemWidget(currentTeacher->GetWorkSlots()->item(p)))->ParseToIndexes();
 
-                        //Проверка, что на субботу и на то, что у преподователя это время свободно
+                        //Проверка субботы и то, что учитель в этом время свободен
                         if ((slot.DayIndex == 5 && !currentSg->IsStudyingAtSaturdays()) ||
                                 currentTeacher->GetScheduel()[slot.DayIndex][slot.TimeIndex][slot.WeekIndex] != nullptr)
                             continue;
@@ -275,11 +277,11 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked() //Генераци�
                         //Пытаемся передвинуть пару на другое время
                         for (int a = 0; a < checking->GetWorkSlots()->count() && !subFlag; a++)
                         {
-                            ParsedWorkSlot subSlot = ((WorkSlot*)
+                            ParsedWorkSlot subSlot = ((WorkSlot*) //Время другого педагога, чью пару пытаемся сдвинуть
                                                       checking->GetWorkSlots()
                                                       ->itemWidget(checking->GetWorkSlots()->item(a)))->ParseToIndexes();
 
-                            //Если время свободно и у учителя и у группы
+                            //Если время свободно и у учителя (пару которого пытаемся сдвинуть) и у группы
                             if (currentSg->GetScheduel()[subSlot.DayIndex][subSlot.TimeIndex][subSlot.WeekIndex] == nullptr &&
                                     checking->GetScheduel()[subSlot.DayIndex][subSlot.TimeIndex][subSlot.WeekIndex] == nullptr)
                             {
@@ -308,7 +310,7 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked() //Генераци�
         }
     }
 
-    //Если не получилось составить рассписание, то мы выводим сообщение о ошибке, но все равно создадим файлы с тем, что получилось
+    //Если не получилось составить рассписание, то мы выводим сообщение о ошибке, но все равно создаем файлы с тем, что получилось
 
     if (!mainFlag)
         QMessageBox::information(nullptr, "Ошибка!",
