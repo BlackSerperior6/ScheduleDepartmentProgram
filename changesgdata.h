@@ -10,7 +10,7 @@ namespace Ui {
 class ChangeSgData;
 }
 
-class ChangeSgData : public QDialog
+class ChangeSgData : public QDialog //Форма редактирования учебной группы
 {
     Q_OBJECT
 
@@ -38,13 +38,13 @@ private slots:
 private:
     Ui::ChangeSgData *ui;
 
-    StudyGroup *Group;
+    StudyGroup *Group; //Редактируемая группа
 
-    QListWidget *Teachers;
+    QListWidget *Teachers; //Список всех заданных программе учителей
 
-    QListWidget *ParentList;
+    QListWidget *ParentList; //Список, из которого был получен элемент
 
-    int currentListIndex;
+    int currentListIndex; //Индес выбранного элемента с списке предметов
 };
 
 #endif // CHANGESGDATA_H

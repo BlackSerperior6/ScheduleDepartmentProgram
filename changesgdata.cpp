@@ -13,21 +13,25 @@ ChangeSgData::ChangeSgData(QWidget *parent, StudyGroup *group, QListWidget *teac
 {
     ui->setupUi(this);
 
+    //Записываем данные: группа, учителя, родительский лист
     Group = group;
     Teachers = teachers;
     ParentList = parentList;
 
+    //Задавание данных в элементы ui: название группы и учится ли она в субботу
     ui->NameEdit->setText(Group->GetName());
     ui->StudyAtSaturday->setChecked(Group->IsStudyingAtSaturdays());
     currentListIndex = -1;
 
     QListWidget *list = Group->GetLessons();
 
+    //Переносим в список ui все предметы группыю. UI список служит буффером
     for (int i = 0; i < list->count(); i++)
     {
         Lessons *lesson = new Lessons(nullptr, nullptr, nullptr, false);
         LessonListWidgetItem *item = new LessonListWidgetItem(lesson);
 
+        //Причем элементы не переносятся, а именно что копируются в буффер - список
         *lesson = *((Lessons*) list->itemWidget(list->item(i)));
 
         ui->LessonsList->addItem(item);
