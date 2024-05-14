@@ -3,12 +3,11 @@
 
 #include <QWidget>
 #include <QLabel>
-
 #include <QListWidget>
 
 #include "ParsedWorkSlot.h"
 
-class WorkSlot : public QWidget
+class WorkSlot : public QWidget //Класс рабочего слота
 {
     Q_OBJECT
 public:
@@ -38,9 +37,9 @@ public:
     ParsedWorkSlot ParseToIndexes();
 
 private:
-    QLabel *Day;
-    QLabel *Time;
-    QLabel *WhatWeek;
+    QLabel *Day; //День
+    QLabel *Time; //Время
+    QLabel *WhatWeek; //Номер недели
 
     bool isSet;
 

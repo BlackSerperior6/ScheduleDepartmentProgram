@@ -2,19 +2,20 @@
 #include "ui_changeworkslot.h"
 
 #include <QMessageBox>
-#include <iostream>
 
 ChangeWorkSlot::ChangeWorkSlot(QWidget *parent, WorkSlot *slot, QListWidget *parentlist) :
     QDialog(parent),
-    ui(new Ui::ChangeWorkSlot)
+    ui(new Ui::ChangeWorkSlot) //ui для редактирования рабочего слота учителя
 {
     ui->setupUi(this);
 
+    //Передаем слот и родительский список
     Slot = slot;
     Parentlist = parentlist;
 
     bool flag = false;
 
+    //Задаем элементам ui элементы слота
     for (int i = 0; i < ui->DayBox->count() && !flag; i++ )
     {
         if (Slot->GetDay() == ui->DayBox->itemText(i))
@@ -56,6 +57,7 @@ void ChangeWorkSlot::on_DialogButtons_accepted()
 {
     bool flag = false;
 
+    //Проверка, что такого слота уже нет
     for (int i = 0; i < Parentlist->count() && !flag; i++)
     {
         WorkSlot *current = (WorkSlot*)
@@ -67,6 +69,7 @@ void ChangeWorkSlot::on_DialogButtons_accepted()
                                 ui->WeekBox->currentText());
     }
 
+    //Если есть, выдаем сообщение о ошибке
     if (flag)
     {
         QMessageBox::information(nullptr, "Ошибка!",
@@ -76,11 +79,13 @@ void ChangeWorkSlot::on_DialogButtons_accepted()
 
     flag = !Slot->GetDay().isEmpty();
 
+    //Задаем значения редактируемому/создаваемому элементу
     Slot->SetDay(ui->DayBox->currentText());
     Slot->SetTime(ui->TimeBox->currentText());
     Slot->SetWhatWeek(ui->WeekBox->currentText());
     Slot->ChangeIsSet(true);
 
+    //Сортируем, только если элемент редактируемый (иначе сортировку проведет метод добавления в форме редактирования учителя)
     if (flag)
         Parentlist->sortItems();
 

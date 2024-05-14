@@ -3,6 +3,7 @@
 
 Teacher::Teacher(QWidget *parent, QListWidget *parentList) : QWidget(parent)
 {
+    //Задавание геометрии
     Name = new QLabel(this);
     Name->setGeometry(10, 0, 191, 20);
 
@@ -10,6 +11,7 @@ Teacher::Teacher(QWidget *parent, QListWidget *parentList) : QWidget(parent)
 
     ClearScheduel();
 
+    //Вызов формы
     ChangeTeacherFrom *win = new ChangeTeacherFrom(nullptr, this, parentList);
 
     win->setModal(true);
@@ -45,6 +47,7 @@ void Teacher::ClearScheduel()
 {
     Scheduel.clear();
 
+    //Переинециализация вектора, который собой представляет рассписание учителя
     Scheduel = std::vector<std::vector
             <std::vector<Lessons*>>>(6, std::vector<std::vector<Lessons*>>
                                      (6, std::vector<Lessons*>(2, nullptr)));

@@ -6,7 +6,7 @@
 
 struct ParsedWorkSlot
 {
-    ParsedWorkSlot(QString day, QString time, QString week)
+    ParsedWorkSlot(QString day, QString time, QString week) //Класс рабочего слота, переведенного в индексы
     {
         QStringList buffer;
 
@@ -24,7 +24,7 @@ struct ParsedWorkSlot
         WeekIndex = buffer.indexOf(week);
     }
 
-    bool operator==(ParsedWorkSlot &other)
+    bool operator==(ParsedWorkSlot &other) //Оператор присваивания
     {
         return DayIndex == other.DayIndex && TimeIndex == other.TimeIndex && WeekIndex == other.WeekIndex;
     }

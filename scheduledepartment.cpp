@@ -1,16 +1,16 @@
 #include "scheduledepartment.h"
 #include "ui_scheduledepartment.h"
 
+#include <fstream>
+
+#include <QMessageBox>
+#include <QFileDialog>
+#include <QTextCodec>
+
 #include "studygroup.h"
 #include "teacher.h"
 #include "changesgdata.h"
 #include "changeteacherfrom.h"
-#include "lessons.h"
-
-#include <QMessageBox>
-#include <QFileDialog>
-#include <fstream>
-#include <QTextCodec>
 
 ScheduleDepartment::ScheduleDepartment(QWidget *parent) //Инициализация интерфейса
     : QMainWindow(parent)
@@ -19,7 +19,7 @@ ScheduleDepartment::ScheduleDepartment(QWidget *parent) //Инициализац
     ui->setupUi(this);
 
     //Установка русской кодовой страницы
-    QTextCodec::setCodecForLocale(QTextCodec::codecForName("CP 1251"));
+    QTextCodec::setCodecForLocale(QTextCodec::codecForName("CP 1251")); //setlocale(LC_ALL, RUS)
 
     //Инициализация нужных переменных
     StudentGroupsRowSelected = -1; //Выбранный ряд в списке учеников
@@ -310,7 +310,7 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked() //Генераци�
         }
     }
 
-    //Если не получилось составить рассписание, то мы выводим сообщение о ошибке, но все равно создаем файлы с тем, что получилось
+    //Если не получилось составить рассписание, то мы выводим сообщение о ошибке, но все равно создаем файлы с тем, что получилось поставить
 
     if (!mainFlag)
         QMessageBox::information(nullptr, "Ошибка!",

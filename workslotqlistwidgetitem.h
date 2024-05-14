@@ -5,7 +5,7 @@
 
 #include "workslot.h"
 
-class WorkSlotQListWidgetItem : public QListWidgetItem
+class WorkSlotQListWidgetItem : public QListWidgetItem //Класс элемента списка рабочих слотов
 {
 public:
     WorkSlotQListWidgetItem(WorkSlot *Slot);
@@ -14,7 +14,7 @@ public:
 
 private:
 
-    WorkSlot *slot;
+    WorkSlot *slot; //Привязанный слот
 
 };
 

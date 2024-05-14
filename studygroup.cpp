@@ -1,12 +1,11 @@
 #include "studygroup.h"
 #include "changesgdata.h"
 
-#include <iostream>
-
 StudyGroup::StudyGroup(QWidget *parent, QListWidget *teachers, QListWidget *parentList) : QWidget(parent)
 {
     StudyAtSaturday = false;
 
+    //Задавание геометриии QLabelам
     Name = new QLabel(this);
 
     Name->setGeometry(10, 0, 191, 16);
@@ -15,6 +14,7 @@ StudyGroup::StudyGroup(QWidget *parent, QListWidget *teachers, QListWidget *pare
 
     ClearScheduel();
 
+    //Вызов интерфейса - редактора
     ChangeSgData *win = new ChangeSgData(nullptr, this, teachers, parentList);
 
     win->setModal(true);
@@ -49,8 +49,6 @@ QString StudyGroup::GetName()
 QListWidget *StudyGroup::GetLessons()
 {
     return Les;
-
-
 }
 
 std::vector<std::vector<std::vector<Lessons*>>>& StudyGroup::GetScheduel()
@@ -62,6 +60,7 @@ void StudyGroup::ClearScheduel()
 {
     Scheduel.clear();
 
+    //Переинециализация вектора, который собой представляет рассписание группы
     Scheduel = std::vector<std::vector
             <std::vector<Lessons*>>>(6, std::vector<std::vector<Lessons*>>
                                      (6, std::vector<Lessons*>(2, nullptr)));

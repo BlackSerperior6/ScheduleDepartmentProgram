@@ -10,7 +10,7 @@ namespace Ui {
 class ChangeTeacherFrom;
 }
 
-class ChangeTeacherFrom : public QDialog
+class ChangeTeacherFrom : public QDialog //Форма для редактирования педагога
 {
     Q_OBJECT
 
@@ -36,9 +36,9 @@ private slots:
 private:
     Ui::ChangeTeacherFrom *ui;
 
-    Teacher *Teach;
+    Teacher *Teach; //Педагог
 
-    QListWidget *ParentList;
+    QListWidget *ParentList; //Родительский список педагога
 
     int WorkSlotsRowSelected;
 };

@@ -1,10 +1,10 @@
 #include "changelessonform.h"
 #include "ui_changelessonform.h"
 
+#include <QMessageBox>
+
 #include "lessons.h"
 #include "teacher.h"
-
-#include <QMessageBox>
 
 ChangeLessonForm::ChangeLessonForm(QWidget *parent, Lessons *lesson, QListWidget *teachers,
                                    QListWidget *parentList) :

@@ -4,8 +4,9 @@
 #include "changelessonform.h"
 
 Lessons::Lessons(QWidget *parent, QListWidget *teachersList,
-                 QListWidget *parentList, bool shouldCallInterface) : QWidget(parent)
+                 QListWidget *parentList, bool shouldCallInterface) : QWidget(parent) //Класс урока
 {
+    //Задаем геометрию QLabelам, который будут отображать данные урока
     Name = new QLabel(this);
     Name->setGeometry(0, 0, 111, 16);
 
@@ -19,8 +20,10 @@ Lessons::Lessons(QWidget *parent, QListWidget *teachersList,
 
     HowManyPerTwoWeeks = -1;
 
+    //Если требуется вызвать интерфейс редактирования урока
     if (shouldCallInterface)
     {
+        //Вызываем
         ChangeLessonForm *win = new ChangeLessonForm(nullptr, this, teachersList, parentList);
 
         win->setModal(true);
@@ -35,9 +38,8 @@ void Lessons::SetName(QString name)
 
 void Lessons::SetTeacher(QWidget *teacher)
 {
-    Teacher* teach = (Teacher*) teacher;
+    TeachersName->setText(((Teacher*) teacher)->GetName());
 
-    TeachersName->setText(teach->GetName());
     Teach = teacher;
 }
 
@@ -47,7 +49,7 @@ void Lessons::SetHowManyPerTwoWeeks(int amount)
     AmountLabel->setText(QString::number(HowManyPerTwoWeeks));
 }
 
-void Lessons::operator=(Lessons &lessons)
+void Lessons::operator=(Lessons &lessons) //Оператор присваивания
 {
     SetName(lessons.GetName());
     SetTeacher(lessons.GetTeacher());

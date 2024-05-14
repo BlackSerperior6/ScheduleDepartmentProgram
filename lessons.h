@@ -4,10 +4,8 @@
 #include <QObject>
 #include <QLabel>
 #include <QListWidget>
-#include <QListWidgetItem>
-#include <vector>
 
-class Lessons : public QWidget
+class Lessons : public QWidget //Класс урока
 {
     Q_OBJECT
 public:

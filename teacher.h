@@ -3,15 +3,12 @@
 
 #include <QWidget>
 #include <QListWidget>
-#include <QListWidgetItem>
 #include <QLabel>
-
-#include <vector>
 
 #include "workslot.h"
 #include "lessons.h"
 
-class Teacher : public QWidget
+class Teacher : public QWidget //Класс учителя
 {
     Q_OBJECT
 public:
@@ -31,11 +28,11 @@ public:
 
 private:
 
-    QLabel *Name;
+    QLabel *Name; //Имя учителя
 
-    QListWidget *WorkSlots;
+    QListWidget *WorkSlots; //Список его рабочего времени
 
-    std::vector<std::vector<std::vector<Lessons*>>> Scheduel;
+    std::vector<std::vector<std::vector<Lessons*>>> Scheduel; //Расписание учителя
 
 signals:
 

@@ -2,9 +2,9 @@
 #define CHANGESGDATA_H
 
 #include <QDialog>
+#include <QListWidget>
 
 #include "studygroup.h"
-#include <QListWidget>
 
 namespace Ui {
 class ChangeSgData;

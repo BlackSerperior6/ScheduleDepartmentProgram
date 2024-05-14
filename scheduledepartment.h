@@ -43,6 +43,7 @@ private:
 
     int StudentGroupsRowSelected;
     int TeachersGroupsRowSelected;
-    QString FilePath;
+
+    QString FilePath; //Путь для вывода рещультата программы
 };
 #endif // SCHEDULEDEPARTMENT_H

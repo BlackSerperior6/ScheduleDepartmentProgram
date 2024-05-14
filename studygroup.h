@@ -8,7 +8,7 @@
 
 #include "lessons.h"
 
-class StudyGroup : public QWidget
+class StudyGroup : public QWidget //Класс учебной группы
 {
     Q_OBJECT
 public:
@@ -31,19 +31,17 @@ public:
 
     void ClearScheduel();
 
-    static inline StudyGroup* GetGroupByName(QString& name, QListWidget *list);
-
 signals:
 
 private:
 
-    QLabel *Name;
+    QLabel *Name; //Имя группы
 
-    QListWidget *Les;
+    QListWidget *Les; //Список предметов
 
-    std::vector<std::vector<std::vector<Lessons*>>> Scheduel;
+    bool StudyAtSaturday; //Учатся ли в субботу
 
-    bool StudyAtSaturday;
+    std::vector<std::vector<std::vector<Lessons*>>> Scheduel; //Расписание группы
 };
 
 #endif // STUDYGROUP_H

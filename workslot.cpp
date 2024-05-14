@@ -1,10 +1,10 @@
 #include "workslot.h"
-
 #include "changeworkslot.h"
 
 WorkSlot::WorkSlot(QWidget *parent, bool shouldCallDialogs,
                    QListWidget *parentList) : QWidget(parent)
 {
+    //Задование геометрии
     Day = new QLabel(this);
     Day->setGeometry(10, 0, 81, 16);
 
@@ -16,6 +16,7 @@ WorkSlot::WorkSlot(QWidget *parent, bool shouldCallDialogs,
 
     isSet = false;
 
+    //Если надо вызвать интерфейс, то вызываем
     if (shouldCallDialogs)
     {
         ChangeWorkSlot *win = new ChangeWorkSlot(nullptr, this, parentList);
@@ -55,14 +56,14 @@ void WorkSlot::SetWhatWeek(QString week)
     WhatWeek->setText(week);
 }
 
-void WorkSlot::operator=(WorkSlot &slot)
+void WorkSlot::operator=(WorkSlot &slot) // Оператор присваивания
 {
     SetDay(slot.GetDay());
     SetTime(slot.GetTime());
     SetWhatWeek(slot.GetWhatWeek());
 }
 
-bool WorkSlot::Compare(QString day, QString time, QString whatWeek)
+bool WorkSlot::Compare(QString day, QString time, QString whatWeek) //Метод сравнивания
 {
     return GetDay() == day && GetTime() == time && GetWhatWeek() == whatWeek;
 }
@@ -77,7 +78,7 @@ void WorkSlot::ChangeIsSet(bool set)
     isSet = set;
 }
 
-ParsedWorkSlot WorkSlot::ParseToIndexes()
+ParsedWorkSlot WorkSlot::ParseToIndexes() //Метод перевода рабочего слота в индексы
 {
     return ParsedWorkSlot(Day->text(), Time->text(), WhatWeek->text());
 }

@@ -2,16 +2,15 @@
 #define CHANGEWORKSLOT_H
 
 #include <QDialog>
+#include <QListWidget>
 
 #include "workslot.h"
-
-#include <QListWidget>
 
 namespace Ui {
 class ChangeWorkSlot;
 }
 
-class ChangeWorkSlot : public QDialog
+class ChangeWorkSlot : public QDialog //Форма для редактирования рабочего слота
 {
     Q_OBJECT
 
@@ -27,7 +26,7 @@ private slots:
 private:
     Ui::ChangeWorkSlot *ui;
 
-    WorkSlot *Slot;
+    WorkSlot *Slot; //Сам слот
 
     QListWidget *Parentlist;
 };

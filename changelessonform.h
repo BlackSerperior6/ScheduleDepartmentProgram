@@ -2,10 +2,9 @@
 #define CHANGELESSONFORM_H
 
 #include <QDialog>
+#include <QListWidget>
 
 #include "lessons.h"
-
-#include <QListWidget>
 
 namespace Ui {
 class ChangeLessonForm;

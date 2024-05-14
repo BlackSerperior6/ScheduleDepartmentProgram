@@ -1,25 +1,27 @@
 #include "changeteacherfrom.h"
 #include "ui_changeteacherfrom.h"
+
 #include <QMessageBox>
 
 #include "workslotqlistwidgetitem.h"
 
 ChangeTeacherFrom::ChangeTeacherFrom(QWidget *parent, Teacher *teacher, QListWidget *parentList) :
     QDialog(parent),
-    ui(new Ui::ChangeTeacherFrom)
+    ui(new Ui::ChangeTeacherFrom) //Форма редактирования учителя
 {
     ui->setupUi(this);
 
     WorkSlotsRowSelected = -1;
 
-    ParentList = parentList;
+    ParentList = parentList; //Предает список, из которого перешел учитель
 
-    Teach = teacher;
+    Teach = teacher; //Передаем учителя
 
-    ui->NameEdit->setText(Teach->GetName());
+    ui->NameEdit->setText(Teach->GetName()); //Передаем его имя в элемент ui
 
     QListWidget *list = Teach->GetWorkSlots();
 
+    //Передаем его рабочие слоты в буфферный список
     for (int i = 0; i < list->count(); i++)
     {
         WorkSlot *slot = new WorkSlot(nullptr, false);
@@ -39,13 +41,13 @@ ChangeTeacherFrom::~ChangeTeacherFrom()
 
 void ChangeTeacherFrom::on_DialogButtons_accepted()
 {
-    if (ui->NameEdit->text().isEmpty())
+    if (ui->NameEdit->text().isEmpty()) //Сообщаем о ошибке, если нет именни
     {
         QMessageBox::information(nullptr, "Ошибка!", "Не указано ФИО преподователя!");
         return;
     }
 
-    if (ui->WorkSlotsList->count() == 0)
+    if (ui->WorkSlotsList->count() == 0) //Сообщаем о ошибке, если нет времени
     {
         QMessageBox::information(nullptr, "Ошибка!", "У преподователя должно быть рабочие время!");
         return;
@@ -53,6 +55,7 @@ void ChangeTeacherFrom::on_DialogButtons_accepted()
 
     bool flag = false;
 
+    //Проверка, что учителя с таким именнем уже нет
     for (int i = 0; i < ParentList->count() && !flag; i++)
     {
         Teacher *current = (Teacher*) ParentList->itemWidget(ParentList->item(i));
@@ -61,18 +64,21 @@ void ChangeTeacherFrom::on_DialogButtons_accepted()
                 current->GetName() == ui->NameEdit->text();
     }
 
+    //Сообщение о ошибке, если есть
     if (flag)
     {
         QMessageBox::information(nullptr, "Ошибка!", "Учитель с таким именем уже существует");
         return;
     }
 
+    //Задамем имя учителя
     Teach->SetName(ui->NameEdit->text());
 
     QListWidget *list = Teach->GetWorkSlots();
 
     list->clear();
 
+    //Переносим рабочие слоты из буффера в реальный список
     for (int i = 0; i < ui->WorkSlotsList->count(); i++)
     {
         WorkSlot *slot = new WorkSlot(nullptr, false);
@@ -94,8 +100,10 @@ void ChangeTeacherFrom::on_DialogButtons_rejected()
 
 void ChangeTeacherFrom::on_WorkSlotsList_itemDoubleClicked(QListWidgetItem *item)
 {
+    //Получаем редактируемый слот
     WorkSlot *slot = (WorkSlot*) ui->WorkSlotsList->itemWidget(item);
 
+    //Вызываем ui для редактирования данных рабочего слота
     ChangeWorkSlot *win = new ChangeWorkSlot(nullptr, slot, ui->WorkSlotsList);
 
     win->setModal(true);
@@ -104,16 +112,20 @@ void ChangeTeacherFrom::on_WorkSlotsList_itemDoubleClicked(QListWidgetItem *item
 
 void ChangeTeacherFrom::on_AddButton_clicked()
 {
+    //При добавлении нового рабочего слота вызываем контсруктор
     WorkSlot *slot = new WorkSlot(nullptr, true, ui->WorkSlotsList);
     WorkSlotQListWidgetItem *item = new WorkSlotQListWidgetItem(slot);
 
+    //Если создание отменили
     if (!slot->IsSet())
     {
+        //Чистим память
         delete slot;
         delete item;
         return;
     }
 
+    //Добавляем в список и сортируем
     ui->WorkSlotsList->addItem(item);
     ui->WorkSlotsList->setItemWidget(item, slot);
     ui->WorkSlotsList->sortItems();
@@ -129,6 +141,7 @@ void ChangeTeacherFrom::on_RemoveButton_clicked()
     if (WorkSlotsRowSelected == -1)
         return;
 
+    //Удаляем выбранный элемент
     QListWidgetItem *it = ui->WorkSlotsList->takeItem(WorkSlotsRowSelected);
     delete it;
 
