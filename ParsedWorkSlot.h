@@ -24,7 +24,7 @@ struct ParsedWorkSlot
         WeekIndex = buffer.indexOf(week);
     }
 
-    bool operator==(ParsedWorkSlot &other) //Оператор присваивания
+    bool operator==(ParsedWorkSlot &other) //Оператор сравнения
     {
         return DayIndex == other.DayIndex && TimeIndex == other.TimeIndex && WeekIndex == other.WeekIndex;
     }
