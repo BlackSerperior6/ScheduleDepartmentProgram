@@ -77,8 +77,8 @@
   <widget class="QPushButton" name="AddButton">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>50</y>
+     <x>280</x>
+     <y>70</y>
      <width>151</width>
      <height>23</height>
     </rect>
@@ -90,8 +90,8 @@
   <widget class="QPushButton" name="RemoveButton">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>80</y>
+     <x>280</x>
+     <y>100</y>
      <width>151</width>
      <height>23</height>
     </rect>
@@ -142,8 +142,8 @@
   <widget class="QPushButton" name="ClearButton">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>110</y>
+     <x>280</x>
+     <y>130</y>
      <width>151</width>
      <height>23</height>
     </rect>

@@ -1,3 +1,5 @@
+#include <QFrame>
+
 #include "studygroup.h"
 #include "changesgdata.h"
 

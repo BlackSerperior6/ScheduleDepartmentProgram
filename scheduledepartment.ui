@@ -84,27 +84,41 @@
      <widget class="QPushButton" name="AddStudyGroupButton">
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>210</x>
         <y>30</y>
-        <width>101</width>
+        <width>121</width>
         <height>23</height>
        </rect>
       </property>
       <property name="text">
        <string>Добавить группу</string>
       </property>
+      <property name="icon">
+       <iconset resource="Resources.qrc">
+        <normaloff>:/Images/Resources/plus_PNG104.png</normaloff>:/Images/Resources/plus_PNG104.png</iconset>
+      </property>
      </widget>
      <widget class="QPushButton" name="RemoveStudyGroupButton">
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>210</x>
         <y>60</y>
-        <width>101</width>
+        <width>121</width>
         <height>23</height>
        </rect>
       </property>
       <property name="text">
        <string>Удалить группу</string>
+      </property>
+      <property name="icon">
+       <iconset resource="Resources.qrc">
+        <normaloff>:/Images/Resources/minus.png</normaloff>:/Images/Resources/minus.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>25</width>
+        <height>25</height>
+       </size>
       </property>
      </widget>
      <widget class="QLabel" name="StudyGroupNameLable">
@@ -128,20 +142,30 @@
      <widget class="QPushButton" name="ClearSudyGroupButton">
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>210</x>
         <y>90</y>
-        <width>101</width>
+        <width>121</width>
         <height>23</height>
        </rect>
       </property>
       <property name="text">
        <string>Очистить список</string>
       </property>
+      <property name="icon">
+       <iconset resource="Resources.qrc">
+        <normaloff>:/Images/Resources/png-transparent-rubbish-bins-waste-paper-baskets-emoji-sticker-emoji-glass-waste-containment-waste.png</normaloff>:/Images/Resources/png-transparent-rubbish-bins-waste-paper-baskets-emoji-sticker-emoji-glass-waste-containment-waste.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>25</width>
+        <height>25</height>
+       </size>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
-      <string>Учителя</string>
+      <string>Педагоги</string>
      </attribute>
      <widget class="QListWidget" name="TeacherList">
       <property name="geometry">
@@ -163,7 +187,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Добавить учителя</string>
+       <string>Добавить педагога</string>
       </property>
      </widget>
      <widget class="QPushButton" name="RemoveTeacherButton">
@@ -176,7 +200,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Удалить учителя</string>
+       <string>Удалить педагога</string>
       </property>
      </widget>
      <widget class="QLabel" name="NameTeacherLabel">
@@ -246,6 +270,8 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="Resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

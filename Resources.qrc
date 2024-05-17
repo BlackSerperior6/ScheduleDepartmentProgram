@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/Images">
+        <file>Resources/plus_PNG104.png</file>
+        <file>Resources/minus.png</file>
+        <file>Resources/png-transparent-rubbish-bins-waste-paper-baskets-emoji-sticker-emoji-glass-waste-containment-waste.png</file>
+    </qresource>
+</RCC>
