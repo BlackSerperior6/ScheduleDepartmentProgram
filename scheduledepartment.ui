@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>370</width>
+    <width>380</width>
     <height>380</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>370</width>
+    <width>380</width>
     <height>380</height>
    </size>
   </property>
@@ -28,6 +28,12 @@
   <property name="windowIcon">
    <iconset resource="Resources.qrc">
     <normaloff>:/Images/Resources/Calendar.png</normaloff>:/Images/Resources/Calendar.png</iconset>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(209, 255, 140);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="GenerateScheduelButton">
@@ -45,6 +51,12 @@
       <weight>75</weight>
       <bold>true</bold>
      </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 137, 53);</string>
     </property>
     <property name="text">
      <string>Сгенерировать расписание</string>
@@ -69,11 +81,17 @@
       <height>221</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <property name="tabPosition">
      <enum>QTabWidget::North</enum>
     </property>
     <property name="tabShape">
-     <enum>QTabWidget::Rounded</enum>
+     <enum>QTabWidget::Triangular</enum>
     </property>
     <property name="currentIndex">
      <number>0</number>
@@ -104,15 +122,27 @@
         <height>161</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="viewMode">
+       <enum>QListView::ListMode</enum>
+      </property>
      </widget>
      <widget class="QPushButton" name="AddStudyGroupButton">
       <property name="geometry">
        <rect>
         <x>210</x>
         <y>30</y>
-        <width>121</width>
+        <width>131</width>
         <height>23</height>
        </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 137, 53);</string>
       </property>
       <property name="text">
        <string>Добавить группу</string>
@@ -127,9 +157,15 @@
        <rect>
         <x>210</x>
         <y>60</y>
-        <width>121</width>
+        <width>131</width>
         <height>23</height>
        </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 137, 53);</string>
       </property>
       <property name="text">
        <string>Удалить группу</string>
@@ -168,9 +204,15 @@
        <rect>
         <x>210</x>
         <y>90</y>
-        <width>121</width>
+        <width>131</width>
         <height>23</height>
        </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 137, 53);</string>
       </property>
       <property name="text">
        <string>Очистить список</string>
@@ -204,6 +246,12 @@
         <height>161</height>
        </rect>
       </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
      </widget>
      <widget class="QPushButton" name="AddTeacherButton">
       <property name="geometry">
@@ -213,6 +261,12 @@
         <width>131</width>
         <height>23</height>
        </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 137, 53);</string>
       </property>
       <property name="text">
        <string>Добавить педагога</string>
@@ -230,6 +284,12 @@
         <width>131</width>
         <height>23</height>
        </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 137, 53);</string>
       </property>
       <property name="text">
        <string>Удалить педагога</string>
@@ -275,6 +335,9 @@
       <bold>true</bold>
      </font>
     </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
     <property name="text">
      <string>Не указан путь к папке для выходного продукта!</string>
     </property>
@@ -298,6 +361,12 @@
       <bold>true</bold>
      </font>
     </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 137, 53);</string>
+    </property>
     <property name="text">
      <string>Указать путь</string>
     </property>
@@ -308,7 +377,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>370</width>
+     <width>380</width>
      <height>21</height>
     </rect>
    </property>
