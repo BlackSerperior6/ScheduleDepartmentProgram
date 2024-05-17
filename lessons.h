@@ -24,6 +24,10 @@ public:
 
     void SetHowManyPerTwoWeeks(int amount);
 
+    void SetAttendingGroupName(QString name);
+
+    QString GetAttandingGroupName();
+
     void operator=(Lessons &lessons);
 
 private:
@@ -35,6 +39,8 @@ private:
     QLabel *AmountLabel;
 
     QWidget *Teach;
+
+    QString AttendingGroupName;
 
     int HowManyPerTwoWeeks;
 

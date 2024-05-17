@@ -54,6 +54,17 @@ void Lessons::operator=(Lessons &lessons) //Оператор присваива�
     SetName(lessons.GetName());
     SetTeacher(lessons.GetTeacher());
     SetHowManyPerTwoWeeks(lessons.GetHowManyPerTwoWeeks());
+    SetAttendingGroupName(lessons.GetAttandingGroupName());
+}
+
+void Lessons::SetAttendingGroupName(QString name)
+{
+    AttendingGroupName = name;
+}
+
+QString Lessons::GetAttandingGroupName()
+{
+    return AttendingGroupName;
 }
 
 QString Lessons::GetName()

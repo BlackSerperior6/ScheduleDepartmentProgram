@@ -222,6 +222,8 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked() //Генераци�
             Lessons* currentLesson = (Lessons*)
                     currentSg->GetLessons()->itemWidget(currentSg->GetLessons()->item(j));
 
+            currentLesson->SetAttendingGroupName(currentSg->GetName());
+
             for (int k = 0; k < currentLesson->GetHowManyPerTwoWeeks() && mainFlag; k++) //Добавляем сколько надо раз в рассписание
             {
                 Teacher* currentTeacher = (Teacher*) currentLesson->GetTeacher(); //Берем преподователя, который должен вести урок
@@ -296,7 +298,7 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked() //Генераци�
 
                                 currentSg->GetScheduel()[slot.DayIndex][slot.TimeIndex][slot.WeekIndex] = currentLesson;
 
-                                currentTeacher->GetScheduel()[slot.DayIndex][slot.TimeIndex][slot.WeekIndex] = currentLesson;;
+                                currentTeacher->GetScheduel()[slot.DayIndex][slot.TimeIndex][slot.WeekIndex] = currentLesson;
 
                                 checking->GetScheduel()[subSlot.DayIndex][subSlot.TimeIndex][subSlot.WeekIndex] =
                                         checking->GetScheduel()[slot.DayIndex][slot.TimeIndex][slot.WeekIndex];
@@ -491,7 +493,8 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked() //Генераци�
                     }
 
                     if (current->GetScheduel()[j][k][u] != nullptr)
-                        stream << " " << current->GetScheduel()[j][k][u]->GetName().toStdString();
+                        stream << " " << current->GetScheduel()[j][k][u]->GetName().toStdString() << " "
+                               << "(" << current->GetScheduel()[j][k][u]->GetAttandingGroupName().toStdString() << ")";
 
                     stream << "\n";
                 }

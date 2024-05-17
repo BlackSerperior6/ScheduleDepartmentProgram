@@ -122,6 +122,7 @@ void ChangeSgData::on_AddButton_clicked()
 {
     //Создаем новый экземляр класс Lessons
     Lessons *lesson = new Lessons(nullptr, Teachers, ui->LessonsList);
+
     LessonListWidgetItem *item = new LessonListWidgetItem(lesson);
 
     //Если по итогу добавление было отменено
