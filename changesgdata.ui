@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Редактор групп</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="Resources.qrc">
+    <normaloff>:/Images/Resources/textbook.png</normaloff>:/Images/Resources/textbook.png</iconset>
+  </property>
   <widget class="QDialogButtonBox" name="Buttons">
    <property name="geometry">
     <rect>
@@ -73,6 +77,10 @@
    <property name="text">
     <string>Добавить предмет</string>
    </property>
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Images/Resources/plus_PNG104.png</normaloff>:/Images/Resources/plus_PNG104.png</iconset>
+   </property>
   </widget>
   <widget class="QPushButton" name="RemoveButton">
    <property name="geometry">
@@ -85,6 +93,16 @@
    </property>
    <property name="text">
     <string>Удалить предмет</string>
+   </property>
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Images/Resources/minus.png</normaloff>:/Images/Resources/minus.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>25</width>
+     <height>16</height>
+    </size>
    </property>
   </widget>
   <widget class="QLabel" name="label">
@@ -124,6 +142,16 @@
    </property>
    <property name="text">
     <string>Очистить список</string>
+   </property>
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Images/Resources/png-transparent-rubbish-bins-waste-paper-baskets-emoji-sticker-emoji-glass-waste-containment-waste.png</normaloff>:/Images/Resources/png-transparent-rubbish-bins-waste-paper-baskets-emoji-sticker-emoji-glass-waste-containment-waste.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>25</width>
+     <height>25</height>
+    </size>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -166,7 +194,9 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="Resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>Buttons</sender>

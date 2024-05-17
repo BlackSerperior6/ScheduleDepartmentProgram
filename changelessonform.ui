@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Редактор предметов</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="Resources.qrc">
+    <normaloff>:/Images/Resources/textbook.png</normaloff>:/Images/Resources/textbook.png</iconset>
+  </property>
   <widget class="QDialogButtonBox" name="DialogButtons">
    <property name="geometry">
     <rect>
@@ -114,7 +118,9 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="Resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>DialogButtons</sender>

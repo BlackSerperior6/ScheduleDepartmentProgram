@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Редактор учителей</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="Resources.qrc">
+    <normaloff>:/Images/Resources/teacher.jpg</normaloff>:/Images/Resources/teacher.jpg</iconset>
+  </property>
   <widget class="QDialogButtonBox" name="DialogButtons">
    <property name="geometry">
     <rect>
@@ -79,12 +83,16 @@
     <rect>
      <x>280</x>
      <y>70</y>
-     <width>151</width>
+     <width>161</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
     <string>Добавить рабочие время</string>
+   </property>
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Images/Resources/plus_PNG104.png</normaloff>:/Images/Resources/plus_PNG104.png</iconset>
    </property>
   </widget>
   <widget class="QPushButton" name="RemoveButton">
@@ -92,12 +100,22 @@
     <rect>
      <x>280</x>
      <y>100</y>
-     <width>151</width>
+     <width>161</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
     <string>Удалить рабочие время</string>
+   </property>
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Images/Resources/minus.png</normaloff>:/Images/Resources/minus.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>25</width>
+     <height>25</height>
+    </size>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -144,16 +162,28 @@
     <rect>
      <x>280</x>
      <y>130</y>
-     <width>151</width>
+     <width>161</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
     <string>Очистить список</string>
    </property>
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Images/Resources/png-transparent-rubbish-bins-waste-paper-baskets-emoji-sticker-emoji-glass-waste-containment-waste.png</normaloff>:/Images/Resources/png-transparent-rubbish-bins-waste-paper-baskets-emoji-sticker-emoji-glass-waste-containment-waste.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>25</width>
+     <height>25</height>
+    </size>
+   </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="Resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>DialogButtons</sender>

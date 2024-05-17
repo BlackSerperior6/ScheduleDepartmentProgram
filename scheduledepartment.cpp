@@ -26,6 +26,8 @@ ScheduleDepartment::ScheduleDepartment(QWidget *parent) //Инициализац
     TeachersGroupsRowSelected = -1; //В списке учителей
 
     FilePath = ""; //Путь к папке, в которую будут отправлены файлы
+
+    ui->NoPathLable->setStyleSheet("color: red");
 }
 
 ScheduleDepartment::~ScheduleDepartment()
@@ -187,6 +189,8 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked() //Генераци�
 
         //2. Возвращаем надпись о том, что папка не указана
         ui->NoPathLable->setText("Не указан путь к папке для выходного продукта!");
+
+        ui->NoPathLable->setStyleSheet("color: red");
 
         //3. Очищаем путь
         FilePath = "";
