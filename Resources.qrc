@@ -2,11 +2,11 @@
     <qresource prefix="/Images">
         <file>Resources/plus_PNG104.png</file>
         <file>Resources/minus.png</file>
-        <file>Resources/png-transparent-rubbish-bins-waste-paper-baskets-emoji-sticker-emoji-glass-waste-containment-waste.png</file>
         <file>Resources/teacher.jpg</file>
         <file>Resources/Student.png</file>
         <file>Resources/textbook.png</file>
         <file>Resources/folder.jpg</file>
         <file>Resources/Calendar.png</file>
+        <file>Resources/Trashcan.png</file>
     </qresource>
 </RCC>

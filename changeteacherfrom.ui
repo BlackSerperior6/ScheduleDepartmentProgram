@@ -171,7 +171,7 @@
    </property>
    <property name="icon">
     <iconset resource="Resources.qrc">
-     <normaloff>:/Images/Resources/png-transparent-rubbish-bins-waste-paper-baskets-emoji-sticker-emoji-glass-waste-containment-waste.png</normaloff>:/Images/Resources/png-transparent-rubbish-bins-waste-paper-baskets-emoji-sticker-emoji-glass-waste-containment-waste.png</iconset>
+     <normaloff>:/Images/Resources/Trashcan.png</normaloff>:/Images/Resources/Trashcan.png</iconset>
    </property>
    <property name="iconSize">
     <size>
