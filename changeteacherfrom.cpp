@@ -67,7 +67,7 @@ void ChangeTeacherFrom::on_DialogButtons_accepted()
     //Сообщение о ошибке, если есть
     if (flag)
     {
-        QMessageBox::information(nullptr, "Ошибка!", "Учитель с таким именем уже существует");
+        QMessageBox::information(nullptr, "Ошибка!", "Педагог с таким именем уже существует");
         return;
     }
 
