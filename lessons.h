@@ -26,7 +26,7 @@ public:
 
     void SetAttendingGroupName(QString name);
 
-    QString GetAttandingGroupName();
+    QString GetAttendingGroupName();
 
     void operator=(Lessons &lessons);
 

@@ -54,7 +54,7 @@ void Lessons::operator=(Lessons &lessons) //Оператор присваива�
     SetName(lessons.GetName());
     SetTeacher(lessons.GetTeacher());
     SetHowManyPerTwoWeeks(lessons.GetHowManyPerTwoWeeks());
-    SetAttendingGroupName(lessons.GetAttandingGroupName());
+    SetAttendingGroupName(lessons.GetAttendingGroupName());
 }
 
 void Lessons::SetAttendingGroupName(QString name)
@@ -62,7 +62,7 @@ void Lessons::SetAttendingGroupName(QString name)
     AttendingGroupName = name;
 }
 
-QString Lessons::GetAttandingGroupName()
+QString Lessons::GetAttendingGroupName()
 {
     return AttendingGroupName;
 }

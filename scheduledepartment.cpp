@@ -494,7 +494,7 @@ void ScheduleDepartment::on_GenerateScheduelButton_clicked() //Генераци�
 
                     if (current->GetScheduel()[j][k][u] != nullptr)
                         stream << " " << current->GetScheduel()[j][k][u]->GetName().toStdString() << " "
-                               << "(" << current->GetScheduel()[j][k][u]->GetAttandingGroupName().toStdString() << ")";
+                               << "(" << current->GetScheduel()[j][k][u]->GetAttendingGroupName().toStdString() << ")";
 
                     stream << "\n";
                 }
